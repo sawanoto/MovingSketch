@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f2ef">
+  <title>MovingSketch Gallery</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">音と動きの小さな実験</p>
+      <h1>Moving<span>Sketch</span></h1>
+      <p class="lead">マーパンと一緒に、動きと音が出会う瞬間を集めていくシリーズです。</p>
+    </header>
+
+    <section aria-labelledby="works-title">
+      <div class="section-heading">
+        <h2 id="works-title">スケッチ</h2>
+        <span id="work-count" aria-live="polite"></span>
+      </div>
+      <div class="works" id="works"></div>
+    </section>
+  </main>
+
+  <template id="work-card">
+    <a class="work-card">
+      <span class="work-card__picture" aria-hidden="true">
+        <span class="marpan"><i></i><i></i><i></i></span>
+      </span>
+      <span class="work-card__number"></span>
+      <strong class="work-card__title"></strong>
+      <span class="work-card__description"></span>
+      <span class="work-card__action">ひらく <span aria-hidden="true">→</span></span>
+    </a>
+  </template>
+
+  <script src="./gallery.js"></script>
+</body>
+</html>
