@@ -12,10 +12,14 @@ MovingSketch/
 ├─ gallery.js
 ├─ style.css
 ├─ works.json
+├─ shared/
+│  ├─ marpan.js
+│  └─ marpan-sound.js
 └─ 1_ma-pan/
 ```
 
 新作は `2_title/` のように直下へ追加し、`works.json` に登録します。
+各作品は `shared/` の共通本体を読み込み、マーパンに何をさせるかだけを実装します。
 
 ## ローカル表示
 
