@@ -15,7 +15,16 @@ MovingSketch/
 ├─ shared/
 │  ├─ marpan.js
 │  └─ marpan-sound.js
-└─ 1_ma-pan/
+├─ 1_ma-pan/
+├─ 2_move/
+├─ 3_design/
+├─ 4_Color/
+├─ 5_eyesize/
+├─ 6_bodysize/
+├─ 7_goldenratio/
+├─ 8_mouth/
+├─ 9_wink/
+└─ 10_eye/
 ```
 
 新作は `2_title/` のように直下へ追加し、`works.json` に登録します。
