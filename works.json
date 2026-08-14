@@ -4,5 +4,59 @@
     "title": "Ma-pan: Do Re Mi",
     "description": "三つの目が、ド・レ・ミの音と色に合わせて動きます。",
     "path": "./1_ma-pan/"
+  },
+  {
+    "number": "02",
+    "title": "Ma-pan: Move",
+    "description": "三つ目でマウスを見つめながら、小さなマーパンがあとを追いかけます。",
+    "path": "./2_move/"
+  },
+  {
+    "number": "03",
+    "title": "Ma-pan: Design",
+    "description": "白い眼球と黒い瞳で、マーパンの新しい表情を試します。",
+    "path": "./3_design/"
+  },
+  {
+    "number": "04",
+    "title": "Ma-pan: Color",
+    "description": "ドレミファソラシドの音階パレットから色を選び、マーパンの体を染めます。",
+    "path": "./4_Color/"
+  },
+  {
+    "number": "05",
+    "title": "Ma-pan: Eye Size",
+    "description": "5段階のボタンで、マーパンの三つ目の大きさを変えます。",
+    "path": "./5_eyesize/"
+  },
+  {
+    "number": "06",
+    "title": "Ma-pan: Body Size",
+    "description": "小・中・大の3体を並べ、体の大きさと表情を見比べます。",
+    "path": "./6_bodysize/"
+  },
+  {
+    "number": "07",
+    "title": "Ma-pan: Golden Ratio",
+    "description": "体と三つ目を黄金比で設計し、細い構成図と重ねて観察します。",
+    "path": "./7_goldenratio/"
+  },
+  {
+    "number": "08",
+    "title": "Ma-pan: Mouth",
+    "description": "中央の目を固定し、目にも鼻にも口にも見える表情を観察します。",
+    "path": "./8_mouth/"
+  },
+  {
+    "number": "09",
+    "title": "Ma-pan: Wink",
+    "description": "中央を口の位置に固定し、左右の目で瞬きとウインクをします。",
+    "path": "./9_wink/"
+  },
+  {
+    "number": "10",
+    "title": "Ma-pan: Eye",
+    "description": "黒目・ニコニコ・眠たい・一文字・怒りの5種類で三つ目の表情を比べます。",
+    "path": "./10_eye/"
   }
 ]
