@@ -1,62 +1,30 @@
 [
-  {
-    "number": "01",
-    "title": "Ma-pan: Do Re Mi",
-    "description": "三つの目が、ド・レ・ミの音と色に合わせて動きます。",
-    "path": "./1_ma-pan/"
-  },
-  {
-    "number": "02",
-    "title": "Ma-pan: Move",
-    "description": "三つ目でマウスを見つめながら、小さなマーパンがあとを追いかけます。",
-    "path": "./2_move/"
-  },
-  {
-    "number": "03",
-    "title": "Ma-pan: Design",
-    "description": "白い眼球と黒い瞳で、マーパンの新しい表情を試します。",
-    "path": "./3_design/"
-  },
-  {
-    "number": "04",
-    "title": "Ma-pan: Color",
-    "description": "ドレミファソラシドの音階パレットから色を選び、マーパンの体を染めます。",
-    "path": "./4_Color/"
-  },
-  {
-    "number": "05",
-    "title": "Ma-pan: Eye Size",
-    "description": "5段階のボタンで、マーパンの三つ目の大きさを変えます。",
-    "path": "./5_eyesize/"
-  },
-  {
-    "number": "06",
-    "title": "Ma-pan: Body Size",
-    "description": "小・中・大の3体を並べ、体の大きさと表情を見比べます。",
-    "path": "./6_bodysize/"
-  },
-  {
-    "number": "07",
-    "title": "Ma-pan: Golden Ratio",
-    "description": "体と三つ目を黄金比で設計し、細い構成図と重ねて観察します。",
-    "path": "./7_goldenratio/"
-  },
-  {
-    "number": "08",
-    "title": "Ma-pan: Mouth",
-    "description": "中央の目を固定し、目にも鼻にも口にも見える表情を観察します。",
-    "path": "./8_mouth/"
-  },
-  {
-    "number": "09",
-    "title": "Ma-pan: Wink",
-    "description": "中央を口の位置に固定し、左右の目で瞬きとウインクをします。",
-    "path": "./9_wink/"
-  },
-  {
-    "number": "10",
-    "title": "Ma-pan: Eye",
-    "description": "黒目・ニコニコ・眠たい・一文字・怒りの5種類で三つ目の表情を比べます。",
-    "path": "./10_eye/"
-  }
+  { "number": "01", "title": "Ma-pan: Do Re Mi", "description": "三つの目がド・レ・ミの音と色に合わせて動きます。", "path": "./1_ma-pan/" },
+  { "number": "02", "title": "Ma-pan: Move", "description": "三つ目でマウスを見つめながら、小さなマーパンがあとを追いかけます。", "path": "./2_move/" },
+  { "number": "03", "title": "Ma-pan: Design", "description": "白い輪郭と黒い目で、マーパンの新しい表情を試します。", "path": "./3_design/" },
+  { "number": "04", "title": "Ma-pan: Color", "description": "音階のパレットから色を選び、マーパンの体を染めます。", "path": "./4_Color/" },
+  { "number": "05", "title": "Ma-pan: Eye Size", "description": "5段階のボタンで、マーパンの三つ目の大きさを変えます。", "path": "./5_eyesize/" },
+  { "number": "06", "title": "Ma-pan: Body Size", "description": "小・中・大の3体を並べ、体の大きさと表情を見比べます。", "path": "./6_bodysize/" },
+  { "number": "07", "title": "Ma-pan: Golden Ratio", "description": "体と三つ目を黄金比で設計し、形の調和を観察します。", "path": "./7_goldenratio/" },
+  { "number": "08", "title": "Ma-pan: Mouth", "description": "中央の目を口の位置に固定し、目にも鼻にも口にも見える表情を観察します。", "path": "./8_mouth/" },
+  { "number": "09", "title": "Ma-pan: Wink", "description": "中央を鼻の位置に固定し、左右の目で瞬きとウインクをします。", "path": "./9_wink/" },
+  { "number": "10", "title": "Ma-pan: Eye", "description": "黒目・ニコニコ・眠たい・一文字・怒りの5種類で三つ目の表情を比べます。", "path": "./10_eye/" },
+  { "number": "11", "title": "Ma-pan: Rotate", "description": "饅頭型の可愛さを保ち、横一回転と右向き・左向きを試します。", "path": "./11_rotate/" },
+  { "number": "12", "title": "Ma-pan: Screen Saver", "description": "正面向きのマーパンが画面を滑り、壁にぶつかるたび色を変えます。", "path": "./12_screensaver/" },
+  { "number": "13", "title": "Ma-pan: Split", "description": "白いマーパンが左右・上下へ分裂し、64体になると再びひとつに合体します。", "path": "./13_split/" },
+  { "number": "14", "title": "Ma-pan: Signal", "description": "三つ目を青・黄・赤の信号に見立て、クリックで点灯を切り替えます。", "path": "./14_signal/" },
+  { "number": "15", "title": "Ma-pan: Race Signal", "description": "音声の3・2・1・GOに合わせ、赤い目が一つずつ点灯して最後にすべて緑になります。", "path": "./15_racesignal/" },
+  { "number": "16", "title": "Ma-pan: Star Struck", "description": "エノコログサが体に触れると、三つの瞳が輝くダイヤ形に変わります。", "path": "./16_StarStruck/" },
+  { "number": "17", "title": "Ma-pan: Black Pen", "description": "黒ペンで体をクリックするたびインクが広がり、最後は黒マーパンになります。", "path": "./17_blackpen/" },
+  { "number": "18", "title": "Ma-pan: Coloring", "description": "色を選び、ペンと塗りつぶしでマーパンを自由に彩ります。", "path": "./18_coloring/" },
+  { "number": "19", "title": "Ma-pan: Bird", "description": "鳥が触れると、マーパンの中央の目が黄色い嘴に変わります。", "path": "./19_Bird/" },
+  { "number": "20", "title": "Ma-pan: Stretch", "description": "届きそうで届かない赤い実へ向かって、饅頭型の身体をそっと伸ばします。", "path": "./20_Stretch/" },
+  { "number": "21", "title": "Ma-pan: Compress", "description": "嫌なものが近づくと、身体を少し凹ませながら反対方向へ遠ざかります。", "path": "./21_compress/" },
+  { "number": "22", "title": "Ma-pan: Rolling", "description": "二体のマーパンが、時計回りと反時計回りに平面回転しながら左右へ進みます。", "path": "./22_rolling/" },
+  { "number": "23", "title": "Ma-pan: Melody Flight", "description": "きらきら星の音程に合わせた壁を、マーパンが飛んでくぐります。", "path": "./23_FlappyBird/" },
+  { "number": "24", "title": "Ma-pan: Tulip Flight", "description": "チューリップの音程に合わせた色とりどりの壁を、マーパンが飛んでくぐります。", "path": "./24_FlappyBird2/" },
+  { "number": "25", "title": "Ma-pan: Frog Song Flight", "description": "かえるのうたの音程に合わせた色とりどりの壁を、マーパンが飛んでくぐります。", "path": "./25_FlappyBird3/" },
+  { "number": "26", "title": "Ma-pan: Melody Fly", "description": "きらきら星・かえるのうた・チューリップからステージを選んで遊べるマーパンフライトです。", "path": "./26_MelodyFly/" },
+  { "number": "27", "title": "Ma-pan: Melody Fly 4", "description": "8つの童謡からステージを選んで遊べるマーパンフライトです。", "path": "./27_MelodyFly4/" },
+  { "number": "29", "title": "Ma-pan: Facial", "description": "20種類の表情を、視線追従・まばたき・左右の向き・10色の体色で見比べる2.5D表情カタログです。", "path": "./29_facial/" }
 ]

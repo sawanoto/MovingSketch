@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#dff3ff"><title>MelodyFly</title>
+<style>html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#dff3ff;touch-action:none}canvas{display:block}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+</head><body>
+<script>
+window.FLAPPY_CONFIG = {
+  menuTitle: "MelodyFly",
+  stages: [
+    {
+      name: "きらきら星 / Twinkle, Twinkle, Little Star",
+      tempoBpm: 100,
+      melody: [
+        { note: "ド", beats: 1 }, { note: "ド", beats: 1 },
+        { note: "ソ", beats: 1 }, { note: "ソ", beats: 1 },
+        { note: "ラ", beats: 1 }, { note: "ラ", beats: 1 },
+        { note: "ソ", beats: 2 },
+        { note: "ファ", beats: 1 }, { note: "ファ", beats: 1 },
+        { note: "ミ", beats: 1 }, { note: "ミ", beats: 1 },
+        { note: "レ", beats: 1 }, { note: "レ", beats: 1 },
+        { note: "ド", beats: 2 }
+      ]
+    },
+    {
+      name: "かえるのうた / The Frog Song",
+      tempoBpm: 120,
+      melody: [
+        "ド", "レ", "ミ", "ファ", "ミ", "レ", "ド", "ミ", "ファ", "ソ", "ラ", "ソ", "ファ", "ミ",
+        "ド", "ド", "ド", "ド", "ド", "ド", "レ", "レ", "ミ", "ミ", "ファ", "ファ", "ミ", "レ", "ド"
+      ]
+    },
+    {
+      name: "チューリップ / Tulips",
+      tempoBpm: 112,
+      melody: [
+        "ド", "レ", "ミ", "ド", "レ", "ミ", "ソ", "ミ", "レ", "ド", "レ", "ミ", "レ",
+        "ド", "レ", "ミ", "ド", "レ", "ミ", "ソ", "ミ", "レ", "ド", "レ", "ミ", "ド",
+        "ソ", "ソ", "ミ", "ソ", "ラ", "ラ", "ソ", "ミ", "ミ", "レ", "レ", "ド"
+      ]
+    },
+    {
+      name: "メリーさんのひつじ / Mary Had a Little Lamb",
+      tempoBpm: 120,
+      melody: [
+        "ミ", "レ", "ド", "レ", "ミ", "ミ", "ミ", "レ", "レ", "レ", "ミ", "ソ", "ソ",
+        "ミ", "レ", "ド", "レ", "ミ", "ミ", "ミ", "ミ", "レ", "レ", "ミ", "レ", "ド"
+      ]
+    },
+    {
+      name: "ちょうちょう / Butterfly",
+      tempoBpm: 108,
+      melody: [
+        "ソ", "ミ", "ミ", "ファ", "レ", "レ", "ド", "レ", "ミ", "ファ", "ソ", "ソ", "ソ",
+        "ソ", "ミ", "ミ", "ミ", "ファ", "レ", "レ", "レ", "ド", "ミ", "ソ", "ソ", "ド", "ド", "ド"
+      ]
+    },
+    {
+      name: "ぶんぶんぶん / Buzz, Buzz, Buzz",
+      tempoBpm: 120,
+      melody: [
+        "ソ", "ファ", "ミ", "レ", "ミ", "ファ", "レ", "ド",
+        "ミ", "ファ", "ソ", "ミ", "レ", "ミ", "ファ", "レ",
+        "ミ", "ファ", "ソ", "ミ", "レ", "ミ", "ファ", "レ",
+        "ソ", "ファ", "ミ", "レ", "ミ", "ファ", "レ", "ド"
+      ]
+    },
+    {
+      name: "むすんでひらいて / Close Your Hands, Open Your Hands",
+      tempoBpm: 100,
+      melody: [
+        "ミ", "ミ", "レ", "ド", "ド", "レ", "レ", "ミ", "レ", "ド",
+        "ソ", "ソ", "ファ", "ミ", "ミ", "レ", "ド", "レ", "ミ", "ド"
+      ]
+    },
+    {
+      name: "大きな栗の木の下で / Under the Spreading Chestnut Tree",
+      tempoBpm: 104,
+      melody: [
+        "ド", "ド", "レ", "ミ", "ミ", "ソ", "ミ", "ミ", "レ", "レ", "ド",
+        "ミ", "ミ", "ファ", "ソ", "高いド", "ラ", "高いド", "ソ",
+        "高いド", "高いド", "シ", "ソ", "ラ", "ラ", "ラ", "ラ", "ソ",
+        "ド", "ド", "レ", "ミ", "ミ", "ソ", "ミ", "ミ", "レ", "レ", "ド"
+      ]
+    }
+  ]
+};
+</script>
+<script src="marpan-25d.js"></script>
+<script src="sketch.js"></script>
+</body></html>
