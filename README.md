@@ -24,7 +24,12 @@ MovingSketch/
 ├─ 7_goldenratio/
 ├─ 8_mouth/
 ├─ 9_wink/
-└─ 10_eye/
+├─ 10_eye/
+├─ 11_rotate/
+├─ 12_screensaver/
+├─ ...
+├─ 27_MelodyFly4/
+└─ 29_facial/
 ```
 
 新作は `2_title/` のように直下へ追加し、`works.json` に登録します。
