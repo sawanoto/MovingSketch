@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#efe4d3">
+  <title>マーパン・ブレッドカタログ</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+</head>
+<body>
+  <aside class="bread-panel">
+    <div class="bread-title"><strong>BREAD</strong><span id="bread-name">B01 こげマーパン</span></div>
+    <div class="panel-buttons">
+      <div class="bread-buttons" aria-label="パンの種類を選ぶ">
+        <button class="is-active" data-bread="burnt" type="button">B01 こげ</button>
+        <button data-bread="croissant" type="button">B02 クロワッサン</button>
+        <button data-bread="melon" type="button">B03 メロンパン</button>
+        <button data-bread="toast" type="button">B04 食パン</button>
+        <button data-bread="pizza" type="button">B05 ピザ</button>
+      </div>
+      <div class="view-buttons" aria-label="顔の向きを選ぶ">
+        <button data-yaw="-0.82" type="button">左向き</button>
+        <button class="is-active" data-yaw="0" type="button">正面</button>
+        <button data-yaw="0.82" type="button">右向き</button>
+      </div>
+    </div>
+  </aside>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="bread-marpan.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>
