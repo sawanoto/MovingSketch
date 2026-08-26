@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#f7e9cf">
+  <title>マーパン・ビートクリッカー</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">MARPAN MUSIC LAB / 33</p>
+      <h1>マーパン・ビートクリッカー</h1>
+    </div>
+    <div class="status"><span id="bpm-label">♩ 96 BPM</span><span id="sound-label">音声準備中</span></div>
+  </header>
+  <main class="layout">
+    <section class="stage-panel">
+      <div class="score-row"><div><span class="score-label">音符</span><strong id="score">♪ 0</strong></div><div class="combo" id="combo">0 COMBO</div></div>
+      <div class="music-strip"><div><span class="score-label">MUSIC</span><strong id="song-title">フリービート</strong></div><button type="button" id="music-button">曲を選ぶ</button></div>
+      <div class="fever-wrap"><div class="fever-label"><span>FEVER</span><span id="fever-text">0 / 100</span></div><div class="fever-track"><div id="fever-fill"></div></div></div>
+      <div id="canvas-wrap"></div>
+      <p class="hint">マーパンを叩いて音符を集めよう。拍に合わせると大きなボーナス！</p>
+    </section>
+    <aside class="shop-panel">
+      <div class="shop-heading"><div><p class="eyebrow">SOUND SHOP</p><h2>音楽を育てる</h2></div><span id="rate-label">毎秒 ♪0</span></div>
+      <div id="shop" class="shop-list"></div>
+      <div class="music-shop"><div class="shop-heading"><div><p class="eyebrow">MUSIC LIBRARY</p><h2>曲を集める</h2></div></div><div id="music-list" class="music-list"></div></div>
+      <div class="howto"><span class="howto-mark">♪</span><p><b>ポン、ポン、ポン</b><br>リズムに乗るほど<br>マーパンが元気になるよ。</p></div>
+    </aside>
+  </main>
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <script src="sketch.js"></script>
+</body>
+</html>

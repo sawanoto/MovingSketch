@@ -1,0 +1,89 @@
+:root {
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
+  color: #2d211b;
+}
+
+* { box-sizing: border-box; }
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #efe4d3;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.bread-panel {
+  position: fixed;
+  z-index: 2;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 13px 15px;
+  border: 1px solid rgba(54, 35, 24, .16);
+  border-radius: 19px;
+  background: rgba(255, 250, 240, .88);
+  box-shadow: 0 12px 36px rgba(68, 42, 25, .13);
+  backdrop-filter: blur(12px);
+}
+
+.bread-title {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.bread-title strong {
+  color: #9a4e28;
+  font-size: 12px;
+  letter-spacing: .18em;
+}
+
+.bread-title span { font-size: 13px; font-weight: 800; }
+
+.panel-buttons,
+.bread-buttons,
+.view-buttons { display: flex; gap: 7px; }
+
+.panel-buttons { flex-wrap: wrap; justify-content: flex-end; }
+.bread-buttons { flex-wrap: wrap; }
+
+.bread-buttons button,
+.view-buttons button {
+  padding: 7px 12px;
+  border: 1px solid #c9b9a8;
+  border-radius: 999px;
+  color: #514238;
+  background: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bread-buttons button.is-active,
+.view-buttons button.is-active {
+  color: #fff;
+  border-color: #3b281e;
+  background: #3b281e;
+}
+
+@media (max-width: 520px) {
+  .bread-panel { display: block; right: 8px; bottom: 8px; left: 8px; }
+  .bread-title { justify-content: space-between; margin-bottom: 9px; }
+  .panel-buttons { display: block; }
+  .bread-buttons { display: grid; grid-template-columns: repeat(2, 1fr); margin-bottom: 7px; }
+  .view-buttons { display: grid; grid-template-columns: repeat(3, 1fr); }
+}

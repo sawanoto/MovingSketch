@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#dff0ea">
+  <title>Eating Notes | 音を食べるマーパン</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div><p class="eyebrow">MARPAN SOUND HABITAT / 34</p><h1>Eating Notes</h1><p class="subtitle">音を食べて育つ、マーパンの記録</p></div>
+    <div class="top-actions"><span id="welcome" class="welcome">はじめまして</span><button id="record-button" type="button" class="quiet-button">きろく</button></div>
+  </header>
+  <main class="game-layout">
+    <section class="world-panel">
+      <div class="status-row"><div><span class="label">STAGE</span><strong id="stage-label">微生物世界</strong></div><div class="meters"><span>おなか <b id="hunger">40</b></span><span>ごきげん <b id="mood">70</b></span><span>きれいさ <b id="clean">100</b></span></div></div>
+      <div id="canvas-wrap"></div>
+      <div class="controls">
+        <div class="note-buttons" id="note-buttons" aria-label="音符を食べさせる"></div>
+        <button id="mic-button" type="button" class="mic-button">マイクから音をあげる</button>
+      </div>
+      <p class="hint">鍵盤を弾くと音が生まれます。マーパンをタップすると一緒に遊べます。</p>
+    </section>
+    <aside class="info-panel">
+      <section class="info-section"><p class="eyebrow">TODAY'S SOUND</p><h2>いまの音</h2><div class="last-note"><span id="last-note">まだ食べていないよ</span><small id="last-source">音をひとつ選んでね</small></div></section>
+      <section class="info-section"><p class="eyebrow">SOUND DNA</p><h2>食べた音の色</h2><div id="note-legend" class="note-legend"></div></section>
+      <section class="info-section record-preview"><p class="eyebrow">LITTLE RECORD</p><div><b id="total-notes">0</b><span>音を食べたよ</span></div><p id="time-lived">一緒に過ごした時間 0分</p></section>
+    </aside>
+  </main>
+  <div id="record-modal" class="modal" hidden><div class="modal-card"><button id="close-record" class="close-button" type="button" aria-label="閉じる">×</button><p class="eyebrow">MAR PAN'S RECORD</p><h2>音のきろく</h2><div class="record-grid"><div><b id="record-total">0</b><span>食べた音</span></div><div><b id="record-favorite">-</b><span>いちばん好きな音</span></div><div><b id="record-mic">0</b><span>マイクから</span></div><div><b id="record-manual">0</b><span>手動から</span></div></div><div id="record-bars" class="record-bars"></div><p id="record-stage"></p><p id="record-born"></p></div></div>
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <script src="sketch.js"></script>
+</body>
+</html>
