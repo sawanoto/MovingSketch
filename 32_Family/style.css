@@ -1,0 +1,37 @@
+:root {
+  --ink: #2a2521;
+  --paper: #fbf8f2;
+  --line: #ddd2c4;
+  --accent: #bb6b45;
+  --soft: #f1e7da;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--paper); color: var(--ink); }
+body { font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; }
+button, select { font: inherit; }
+button { cursor: pointer; }
+.toolbar { display: flex; justify-content: space-between; align-items: end; gap: 20px; padding: 22px clamp(16px, 4vw, 52px) 14px; border-bottom: 1px solid var(--line); background: rgba(251, 248, 242, .92); }
+.eyebrow { margin: 0 0 4px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .14em; }
+h1 { margin: 0; font-size: clamp(22px, 3vw, 34px); letter-spacing: .04em; }
+.toolbar__group { display: flex; gap: 12px; }
+label { display: grid; gap: 4px; color: #786b5d; font-size: 11px; font-weight: 700; }
+select { min-width: 130px; border: 1px solid var(--line); border-radius: 6px; padding: 8px 28px 8px 10px; color: var(--ink); background: white; }
+main { width: min(1420px, 100%); margin: 0 auto; padding: 16px clamp(12px, 3vw, 40px) 32px; }
+.controls { display: flex; align-items: end; gap: 20px; flex-wrap: wrap; padding: 12px 0 4px; }
+.control-block { display: grid; gap: 7px; }
+.control-label { color: #786b5d; font-size: 11px; font-weight: 700; }
+.button-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.button-row button, .accent-button { border: 1px solid var(--line); border-radius: 5px; padding: 7px 10px; color: var(--ink); background: white; font-size: 12px; }
+.button-row button:hover, .button-row button.is-active { border-color: var(--accent); background: #f6dfd0; }
+.accent-button { margin-left: auto; border-color: var(--accent); color: white; background: var(--accent); font-weight: 700; }
+.current-label { min-height: 20px; margin: 6px 0; color: #8b7662; font-size: 12px; }
+#canvas-wrap { width: 100%; max-width: 100%; overflow: hidden; }
+#canvas-wrap canvas { display: block; width: 100% !important; max-width: 100%; height: auto !important; border: 1px solid var(--line); border-radius: 8px; background: #f8f1e8; }
+@media (max-width: 680px) {
+  .toolbar { align-items: start; flex-direction: column; }
+  .toolbar__group { width: 100%; }
+  .toolbar__group label { flex: 1; }
+  select { width: 100%; min-width: 0; }
+  .accent-button { margin-left: 0; }
+}
