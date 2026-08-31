@@ -1,0 +1,27 @@
+:root { color-scheme: light; font-family: "Avenir Next", "Yu Gothic", sans-serif; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #dff7ff; touch-action: none; user-select: none; -webkit-user-select: none; }
+button, label { font: inherit; }
+#game, #canvas-wrap, canvas { position: fixed; inset: 0; width: 100%; height: 100%; }
+canvas { display: block; }
+#top-guide { position: fixed; z-index: 3; top: max(18px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); width: min(68vw, 360px); text-align: center; color: #438197; pointer-events: none; text-shadow: 0 2px 0 rgba(255,255,255,.85); }
+#top-guide b, #top-guide small { display: block; }
+#top-guide b { font-size: clamp(17px, 4.7vw, 23px); letter-spacing: .08em; }
+#top-guide small { margin-top: 3px; color: #6799a9; font-size: clamp(11px, 3.2vw, 14px); font-weight: 700; }
+#reset-photos { position: fixed; z-index: 4; top: max(14px, env(safe-area-inset-top)); left: 14px; display: grid; place-items: center; align-content: center; width: 58px; height: 58px; padding: 2px 0 0; border: 3px solid rgba(255,255,255,.82); border-radius: 50%; color: #4d8293; background: rgba(255,255,255,.7); box-shadow: 0 5px 0 #b7dfe9, 0 10px 22px rgba(52,113,137,.12); cursor: pointer; touch-action: manipulation; }
+#reset-photos span { font-size: 27px; line-height: .78; }
+#reset-photos small { margin-top: 3px; font-size: 8px; font-weight: 800; line-height: 1; }
+#reset-photos:disabled { opacity: .3; box-shadow: none; cursor: default; }
+#photo-button { position: fixed; z-index: 4; top: max(14px, env(safe-area-inset-top)); right: 14px; display: grid; place-items: center; width: 58px; height: 58px; border: 4px solid rgba(255,255,255,.88); border-radius: 50%; color: #276d83; background: #fff6a9; box-shadow: 0 5px 0 #acdce8, 0 10px 22px rgba(52,113,137,.16); font-size: 38px; font-weight: 500; line-height: 1; cursor: pointer; touch-action: manipulation; }
+#photo-button span { transform: translateY(-2px); }
+#photo-button input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+#again-button { position: fixed; z-index: 5; left: 50%; bottom: max(32px, calc(env(safe-area-inset-bottom) + 20px)); transform: translate(-50%, 30px) scale(.8); width: min(72vw, 270px); height: 92px; border: 5px solid rgba(255,255,255,.9); border-radius: 50px; color: #28687d; background: #fff6a9; box-shadow: 0 10px 0 #acdce8, 0 18px 30px rgba(43,117,142,.22); opacity: 0; pointer-events: none; transition: opacity .35s, transform .45s cubic-bezier(.2,1.5,.4,1); cursor: pointer; touch-action: manipulation; }
+#again-button.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1); }
+#again-button span { display: inline-block; vertical-align: middle; font-size: 48px; line-height: 1; margin-right: 8px; }
+#again-button small { vertical-align: middle; font-size: 20px; font-weight: 800; }
+#tap-hint { position: fixed; z-index: 3; left: 50%; bottom: 11vh; transform: translateX(-50%); color: #3d8299; opacity: .72; animation: hint 1.25s ease-in-out infinite; pointer-events: none; }
+#tap-hint span { font-size: 48px; filter: drop-shadow(0 4px 2px rgba(50,115,135,.12)); }
+#tap-hint i { position: absolute; width: 62px; height: 25px; border: 3px solid #77bfd2; border-radius: 50%; left: 50%; top: 43px; transform: translateX(-50%); }
+#tap-hint.hide { opacity: 0; transition: opacity .25s; }
+@keyframes hint { 50% { transform: translate(-50%, -13px); } }
+@media (min-width: 760px) { #photo-button { top: 22px; right: 24px; } #reset-photos { top: 22px; left: 24px; } #tap-hint { bottom: 7vh; } }

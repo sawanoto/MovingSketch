@@ -1,5 +1,25 @@
 # MovingSketch
 
+## Gallery
+
+ルートの `index.html` が MovingSketch Gallery です。SoundSketch Gallery の配色、余白、検索、カードグリッド、レスポンシブ設計を引き継ぎ、作品は実行せず静止サムネイルとして表示します。
+
+作品を追加するときは `works.js` の `MOVING_SKETCH_WORKS` に次の項目を1件追加してください。
+
+```js
+{
+  number: 42,
+  title: "作品名",
+  thumbnail: "./42_example/thumbnail.webp",
+  url: "./42_example/",
+  date: "2026-09-02",
+  tags: ["JavaScript", "Game"],
+  description: "作品の短い説明。"
+}
+```
+
+`url` はp5.jsに限らず、ブラウザで開ける任意の相対URL・絶対URLを指定できます。サムネイルは16:10前後の `thumbnail.webp` または `thumbnail.png` を推奨します。
+
 キャラクターの動きと音を組み合わせた、小さなインタラクティブ作品のシリーズです。
 
 SoundSketch / SoundSketchGallery とは別のシリーズ、別のGitリポジトリとして管理します。

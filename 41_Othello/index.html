@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#eee5d4">
+  <title>マーパンオセロ</title>
+  <meta name="description" content="くるっ、パタパタ。盤面の変化を小さな音楽として楽しむマーパンのオセロ。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">MARPAN OTHELLO / 41</p>
+        <h1>マーパンオセロ</h1>
+      </div>
+      <button id="soundButton" class="icon-button" type="button" aria-pressed="true" aria-label="サウンドをオフにする">
+        <span id="soundIcon" aria-hidden="true">♪</span><span id="soundLabel">ON</span>
+      </button>
+    </header>
+
+    <section class="scorebar" aria-label="スコア">
+      <div class="score black-score"><span class="mini-marpan black"></span><span>くろ</span><strong id="blackCount">2</strong></div>
+      <div class="turn" id="turnStatus" aria-live="polite"><span class="turn-dot"></span><span>あなたの番</span></div>
+      <div class="score white-score"><strong id="whiteCount">2</strong><span>しろ</span><span class="mini-marpan white"></span></div>
+    </section>
+
+    <section class="board-wrap">
+      <div id="board" class="board" role="grid" aria-label="8かける8のオセロ盤"></div>
+      <div id="thinking" class="thinking" hidden>CPUが考え中…</div>
+    </section>
+
+    <footer class="footerbar">
+      <p id="hint">光っているマスに置けます</p>
+      <button id="restartButton" class="restart" type="button">もう一度</button>
+    </footer>
+  </main>
+
+  <dialog id="resultDialog" class="result-dialog">
+    <div class="result-mark" aria-hidden="true">● ● ●</div>
+    <p class="result-kicker">GAME SET</p>
+    <h2 id="resultTitle">あなたの勝ち！</h2>
+    <p id="resultScore">くろ 34 — しろ 30</p>
+    <button id="dialogRestart" class="restart primary" type="button">もう一度あそぶ</button>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

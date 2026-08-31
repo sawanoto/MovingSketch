@@ -1,26 +1,6 @@
-const worksElement = document.querySelector("#works");
-const countElement = document.querySelector("#work-count");
-const template = document.querySelector("#work-card");
-
-fetch("./works.json", { cache: "no-cache" })
-  .then((response) => {
-    if (!response.ok) throw new Error("作品一覧を読み込めませんでした。");
-    return response.json();
-  })
-  .then((works) => {
-    countElement.textContent = `${works.length}作品`;
-
-    for (const work of works) {
-      const card = template.content.cloneNode(true);
-      const link = card.querySelector("a");
-      link.href = work.path;
-      link.setAttribute("aria-label", `${work.title}をひらく`);
-      card.querySelector(".work-card__number").textContent = work.number;
-      card.querySelector(".work-card__title").textContent = work.title;
-      card.querySelector(".work-card__description").textContent = work.description;
-      worksElement.append(card);
-    }
-  })
-  .catch((error) => {
-    worksElement.textContent = error.message;
-  });
+const gallery=document.querySelector("#gallery"),search=document.querySelector("#search"),visibleCount=document.querySelector("#visible-count"),workCount=document.querySelector("#work-count"),empty=document.querySelector("#empty"),template=document.querySelector("#work-card-template");
+const works=[...window.MOVING_SKETCH_WORKS].sort((a,b)=>Number(a.number)-Number(b.number));
+function searchableText(work){return[work.title,work.description,...(work.tags||[])].join(" ").toLocaleLowerCase("ja")}
+function createCard(work){const fragment=template.content.cloneNode(true),card=fragment.querySelector(".card"),image=fragment.querySelector(".thumb__image"),date=fragment.querySelector(".date");card.href=work.url;card.setAttribute("aria-label",`${work.title}を開く`);image.src=work.thumbnail;image.alt=`${work.title}の画面`;image.addEventListener("error",()=>image.classList.add("is-missing"));fragment.querySelector(".number").textContent=`#${String(work.number).padStart(2,"0")}`;fragment.querySelector(".title").textContent=work.title;fragment.querySelector(".description").textContent=work.description||"";if(work.date){date.dateTime=work.date;date.textContent=work.date.replaceAll("-",".")}else date.remove();const tags=fragment.querySelector(".tags");for(const tag of work.tags||[]){const chip=document.createElement("span");chip.className="tag";chip.textContent=tag;tags.append(chip)}return fragment}
+function render(query=""){const normalized=query.trim().toLocaleLowerCase("ja"),matched=works.filter(work=>searchableText(work).includes(normalized));gallery.replaceChildren(...matched.map(createCard));visibleCount.textContent=`${matched.length} works shown`;empty.hidden=matched.length>0}
+workCount.textContent=works.length;gallery.setAttribute("aria-busy","false");search.addEventListener("input",()=>render(search.value));render();

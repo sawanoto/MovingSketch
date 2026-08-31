@@ -1,0 +1,74 @@
+:root { color-scheme: light; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; color: #28352e; background: #dce9df; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #dce9df; }
+button { color: inherit; font: inherit; }
+#game { display: grid; grid-template: 74px minmax(560px, calc(100vh - 74px)) / minmax(0, 1fr) 330px; min-height: 100vh; }
+.topbar { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; padding: 10px 22px; border-bottom: 1px solid #afc0b2; background: rgba(245,248,241,.9); backdrop-filter: blur(14px); z-index: 5; }
+.eyebrow { margin: 0 0 3px; color: #708077; font: 9px/1.2 system-ui, sans-serif; letter-spacing: .24em; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 0; font-size: 20px; font-weight: 500; letter-spacing: .14em; }
+.clock { text-align: center; } .clock span { display: block; color: #718078; font-size: 10px; } .clock strong { font-size: 17px; font-weight: 500; }
+.speed { justify-self: end; display: flex; padding: 3px; border: 1px solid #b5c1b8; border-radius: 99px; background: #e7eee8; }
+.speed button, .tabs button { border: 0; background: transparent; cursor: pointer; }
+.speed button { padding: 5px 9px; border-radius: 99px; font: 10px system-ui, sans-serif; }
+.speed button.active { color: white; background: #657d6c; }
+.world { position: relative; min-width: 0; overflow: hidden; background: linear-gradient(#dbeae3 0 54%, #b9cfac 54%); }
+#canvas-wrap, #canvas-wrap canvas { width: 100% !important; height: 100% !important; display: block; }
+.hint { position: absolute; left: 0; right: 0; top: 17px; text-align: center; color: rgba(49,67,56,.6); font-size: 11px; pointer-events: none; }
+.seed-picker { position: absolute; z-index: 4; left: 50%; bottom: 18px; width: min(650px, calc(100% - 28px)); transform: translateX(-50%); padding: 15px 17px 14px; border: 1px solid rgba(91,112,96,.34); border-radius: 18px; background: rgba(247,247,239,.94); box-shadow: 0 12px 45px rgba(48,65,52,.19); backdrop-filter: blur(15px); transition: opacity .3s, transform .3s; }
+.seed-picker.hidden { opacity: 0; transform: translate(-50%, 15px); pointer-events: none; }
+.seed-picker h2 { margin: 2px 0 11px; text-align: center; font-size: 16px; }
+.seed-day { margin: 0; color: #76857b; text-align: center; font: 9px system-ui, sans-serif; letter-spacing: .16em; }
+.seed-options { display: flex; gap: 7px; overflow-x: auto; padding: 2px 1px 6px; scrollbar-width: thin; }
+.seed-option { flex: 1 0 82px; min-height: 58px; padding: 7px 5px; border: 1px solid #cbd4ca; border-radius: 12px; background: rgba(255,255,255,.5); cursor: pointer; font-size: 10px; line-height: 1.35; }
+.seed-option span { display: block; margin-bottom: 3px; font: 18px system-ui, sans-serif; }
+.seed-option:hover:not(:disabled) { border-color: #819685; background: #edf2e9; }
+.seed-option.selected { border-color: #5f7867; outline: 2px solid rgba(95,120,103,.16); background: #e5eee3; }
+.seed-option:disabled { opacity: .33; cursor: default; }
+.seed-description { min-height: 16px; margin: 4px 120px 0 0; color: #6e7b72; font-size: 10px; line-height: 1.5; }
+.watch-day { position: absolute; right: 17px; bottom: 12px; padding: 9px 15px; border: 0; border-radius: 99px; color: white; background: #5f7867; cursor: pointer; font-size: 11px; box-shadow: 0 5px 14px rgba(49,70,55,.15); }
+.watch-day:disabled { color: #8d978f; background: #dde2da; box-shadow: none; cursor: default; }
+.day-progress { position: absolute; z-index: 3; left: 50%; bottom: 19px; width: min(420px, calc(100% - 80px)); transform: translateX(-50%); opacity: 0; pointer-events: none; }
+.day-progress.visible { opacity: 1; }
+.day-progress::before { content:""; display:block; height: 3px; border-radius: 99px; background: rgba(255,255,255,.5); }
+.day-progress i { position: absolute; top: 0; left: 0; width: 0; height: 3px; border-radius: 99px; background: #5f7867; }
+.day-progress span { display:block; margin-top: 7px; color: rgba(42,57,47,.63); text-align:center; font-size:9px; letter-spacing:.08em; }
+.sidepanel { min-width: 0; border-left: 1px solid #afc0b2; background: #f3f4ec; overflow: hidden; }
+.tabs { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid #ccd3ca; }
+.tabs button { padding: 14px 2px 11px; color: #718078; font-size: 10px; border-bottom: 2px solid transparent; }
+.tabs button.active { color: #28352e; border-color: #657d6c; }
+.panel { display: none; height: calc(100vh - 116px); padding: 18px; overflow-y: auto; }
+.panel.active { display: block; } h2 { margin-bottom: 15px; font-size: 15px; font-weight: 500; letter-spacing: .08em; }
+.event { display: grid; grid-template-columns: 42px 1fr; gap: 8px; padding: 9px 0; border-bottom: 1px solid #dce0d8; font-size: 11px; line-height: 1.55; }
+.event time { color: #829087; font: 9px system-ui, sans-serif; }
+.event-reason { display:block; margin-top:5px; padding-left:9px; border-left:2px solid #b9c8ba; color:#758278; font-size:9px; }
+.why { margin: 5px 0 0; padding: 2px 7px; border: 1px solid #c4cec4; border-radius: 99px; background: transparent; color: #637469; cursor: pointer; font-size: 9px; }
+.empty { color: #8b978e; font-size: 11px; line-height: 1.8; }
+.marpan-card, .relation-card, .history-card { margin-bottom: 9px; padding: 12px; border: 1px solid #d5dbd2; border-radius: 10px; background: rgba(255,255,255,.45); }
+.marpan-card { cursor: pointer; } .marpan-card:hover { border-color: #98aa9a; }
+.dot { display: inline-block; width: 8px; height: 8px; margin-right: 7px; border: 1px solid #59645e; border-radius: 50%; vertical-align: 1px; }
+.marpan-card h3, .relation-card h3 { margin-bottom: 6px; font-size: 12px; font-weight: 500; }
+.marpan-card p, .relation-card p, .history-card p { margin-bottom: 0; color: #6f7a73; font-size: 10px; line-height: 1.6; }
+.small { color: #8b968f; font-size: 9px; line-height: 1.7; }
+dialog { width: min(470px, calc(100vw - 28px)); max-height: calc(100vh - 35px); padding: 28px; border: 1px solid #a9b7ab; border-radius: 16px; color: #29372e; background: #f7f6ed; box-shadow: 0 28px 90px rgba(31,47,36,.3); overflow-y: auto; }
+dialog::backdrop { background: rgba(39,53,44,.36); backdrop-filter: blur(3px); }
+dialog .close { position: absolute; top: 10px; right: 12px; border: 0; background: transparent; font: 20px system-ui; cursor: pointer; }
+.mind-head { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; } .mind-head h2 { margin: 0; }
+.mind-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #dce0d8; border: 1px solid #dce0d8; }
+.mind-grid div { min-height: 62px; padding: 10px; background: #f7f6ed; } .mind-grid small { display: block; margin-bottom: 5px; color: #879088; font: 8px system-ui; letter-spacing: .13em; } .mind-grid p { margin: 0; font-size: 11px; line-height: 1.55; }
+.story { width: min(630px, calc(100vw - 28px)); padding: 36px clamp(24px, 7vw, 64px); }
+.story h2 { margin: 12px 0 24px; text-align: center; font-size: 21px; }
+.story-body { font-size: 13px; line-height: 2.15; white-space: pre-line; }
+.next-day { display:block; margin:25px auto 0; padding:10px 22px; border:0; border-radius:99px; color:white; background:#5f7867; cursor:pointer; }
+.reaction-mark { position:absolute; pointer-events:none; }
+.perspectives { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; margin: 22px 0 16px; }
+.perspectives button { padding: 6px 10px; border: 1px solid #bfc9bf; border-radius: 99px; background: transparent; cursor: pointer; font-size: 10px; }
+.perspectives button.active { color: white; background: #657d6c; }
+@media (max-width: 820px) {
+  #game { grid-template: 68px minmax(470px, 67vh) auto / 1fr; }
+  .topbar { grid-template-columns: 1fr auto; padding: 8px 12px; } .clock { text-align: right; } .speed { position: absolute; top: 72px; right: 8px; z-index: 8; } h1 { font-size: 16px; }
+  .sidepanel { border-top: 1px solid #afc0b2; border-left: 0; } .panel { height: 270px; }
+  .seed-picker { bottom: 9px; width: calc(100% - 14px); padding: 12px 10px 10px; }
+  .seed-picker h2 { font-size: 14px; } .seed-option { flex-basis: 75px; }
+  .seed-description { margin-right: 105px; } .watch-day { right:10px; bottom:9px; padding:8px 11px; }
+}

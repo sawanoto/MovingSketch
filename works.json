@@ -26,5 +26,9 @@
   { "number": "25", "title": "Ma-pan: Frog Song Flight", "description": "かえるのうたの音程に合わせた色とりどりの壁を、マーパンが飛んでくぐります。", "path": "./25_FlappyBird3/" },
   { "number": "26", "title": "Ma-pan: Melody Fly", "description": "きらきら星・かえるのうた・チューリップからステージを選んで遊べるマーパンフライトです。", "path": "./26_MelodyFly/" },
   { "number": "27", "title": "Ma-pan: Melody Fly 4", "description": "8つの童謡からステージを選んで遊べるマーパンフライトです。", "path": "./27_MelodyFly4/" },
-  { "number": "29", "title": "Ma-pan: Facial", "description": "20種類の表情を、視線追従・まばたき・左右の向き・10色の体色で見比べる2.5D表情カタログです。", "path": "./29_facial/" }
+  { "number": "29", "title": "Ma-pan: Facial", "description": "20種類の表情を、視線追従・まばたき・左右の向き・10色の体色で見比べる2.5D表情カタログです。", "path": "./29_facial/" },
+  { "number": "30", "title": "Ma-pan: Bread", "description": "パンの種類や焼き上がりによるマーパンの形・色・質感を見比べ、再利用する2.5Dカタログです。", "path": "./30_Bread/" },
+  { "number": "32", "title": "Ma-pan: Family", "description": "6体の家族マーパンを、表情・視線・身長差とともに見比べるキャラクターカタログです。", "path": "./32_Family/" },
+  { "number": "34", "title": "Eating Notes", "description": "現実の音やドレミを食べさせて、色と世界を変えながらマーパンを育てます。", "path": "./34_Eatingnotes/" }
+  ,{ "number": "33", "title": "Ma-pan: Beat Clicker", "description": "マーパンを叩いて音符と演奏会場を育てるリズムクリッカーです。", "path": "./33_CookieClicker/" }
 ]

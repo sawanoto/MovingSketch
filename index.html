@@ -1,41 +1,14 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f2f2ef">
-  <title>MovingSketch Gallery</title>
-  <link rel="stylesheet" href="./style.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fbfaf7">
+  <meta name="description" content="動きから生まれたWeb作品を集めた MovingSketch Gallery"><title>MovingSketch Gallery</title><link rel="stylesheet" href="./style.css">
 </head>
-<body>
-  <main class="page">
-    <header class="hero">
-      <p class="eyebrow">音と動きの小さな実験</p>
-      <h1>Moving<span>Sketch</span></h1>
-      <p class="lead">マーパンと一緒に、動きと音が出会う瞬間を集めていくシリーズです。</p>
-    </header>
-
-    <section aria-labelledby="works-title">
-      <div class="section-heading">
-        <h2 id="works-title">スケッチ</h2>
-        <span id="work-count" aria-live="polite"></span>
-      </div>
-      <div class="works" id="works"></div>
-    </section>
-  </main>
-
-  <template id="work-card">
-    <a class="work-card">
-      <span class="work-card__picture" aria-hidden="true">
-        <span class="marpan"><i></i><i></i><i></i></span>
-      </span>
-      <span class="work-card__number"></span>
-      <strong class="work-card__title"></strong>
-      <span class="work-card__description"></span>
-      <span class="work-card__action">ひらく <span aria-hidden="true">→</span></span>
-    </a>
-  </template>
-
-  <script src="./gallery.js"></script>
-</body>
-</html>
+<body><main class="page">
+  <nav class="gallery-switcher" aria-label="ギャラリー切り替え"><a href="https://sawanoto.github.io/p5js/">SoundSketch</a><span aria-hidden="true">｜</span><a class="is-current" href="./" aria-current="page">MovingSketch</a></nav>
+  <header class="hero"><div><p class="kicker">WEB WORKS / MOTION &amp; PLAY</p><h1>MovingSketch Gallery</h1><p class="lead">動き、触れて、遊べるスケッチ。p5.js、JavaScript、ゲームなど、ブラウザで開ける作品を集めています。</p></div><div class="stats" aria-label="作品数"><strong id="work-count">0</strong>works</div></header>
+  <div class="toolbar"><label for="search"><span class="visually-hidden">作品を検索</span><input class="search" id="search" type="search" placeholder="タイトル・説明・タグで検索" autocomplete="off"></label><div class="hint" id="visible-count" aria-live="polite">作品を読み込んでいます</div></div>
+  <section class="grid" id="gallery" aria-label="MovingSketch作品一覧" aria-busy="true"></section><p class="empty" id="empty" hidden>一致する作品がありません。</p>
+</main>
+<template id="work-card-template"><a class="card"><span class="thumb"><img class="thumb__image" alt="" loading="lazy" decoding="async"><span class="thumb__fallback" aria-hidden="true">MovingSketch</span></span><span class="card__meta"><span class="number"></span><time class="date"></time></span><span class="title"></span><span class="description"></span><span class="tags" aria-label="タグ"></span></a></template>
+<script src="./works.js"></script><script src="./gallery.js"></script></body></html>

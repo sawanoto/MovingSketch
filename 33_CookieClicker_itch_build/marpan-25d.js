@@ -1,57 +1,5 @@
-// Genetic data is deliberately independent from rendering and behavior. Future
-// species can interpret the same sequence differently without changing it.
-class MarpanDNA {
-  static get LENGTH() { return 128; }
-
-  static createId() {
-    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
-      return crypto.randomUUID();
-    }
-    const randomPart = Math.random().toString(36).slice(2);
-    return `marpan-${Date.now().toString(36)}-${randomPart}`;
-  }
-
-  static fromId(id, length = MarpanDNA.LENGTH) {
-    const source = String(id);
-    let state = 2166136261;
-    for (let i = 0; i < source.length; i++) {
-      state ^= source.charCodeAt(i);
-      state = Math.imul(state, 16777619);
-    }
-
-    const bases = "ATGC";
-    let sequence = "";
-    for (let i = 0; i < length; i++) {
-      // Mulberry32: a compact deterministic PRNG used only to map an ID to DNA.
-      state = (state + 0x6D2B79F5) | 0;
-      let value = state;
-      value = Math.imul(value ^ (value >>> 15), value | 1);
-      value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
-      sequence += bases[(value ^ (value >>> 14)) & 3];
-    }
-    return sequence;
-  }
-
-  static isValid(sequence, length = MarpanDNA.LENGTH) {
-    return typeof sequence === "string"
-      && sequence.length === length
-      && /^[ATGC]+$/.test(sequence);
-  }
-
-  static create(options = {}) {
-    const id = String(options.id ?? MarpanDNA.createId());
-    const dna = MarpanDNA.isValid(options.dna)
-      ? options.dna
-      : MarpanDNA.fromId(id);
-    return { id, dna };
-  }
-}
-
 class Marpan25D {
   constructor(options = {}) {
-    const genetics = MarpanDNA.create(options);
-    this.id = genetics.id;
-    this.dna = genetics.dna;
     this.x = options.x ?? 0;
     this.y = options.y ?? 0;
     this.maxSize = options.maxSize ?? 440;
@@ -76,8 +24,6 @@ class Marpan25D {
     this.autoBlinkIndices = options.autoBlinkIndices ?? [0, 1, 2];
     this.nextAutoBlinkAt = 0;
   }
-
-  getGeneticData() { return { id: this.id, dna: this.dna }; }
 
   setPosition(x, y) { this.x = x; this.y = y; }
   setBodyColor(value) { this.bodyColor = value; }

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#d9f1ed">
+  <title>魚マーパンの水槽</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+</head>
+<body>
+  <header>
+    <div><p class="eyebrow">MARPAN AQUARIUM / 35</p><h1>魚マーパンの水槽</h1></div>
+    <div class="header-stats"><span>おんぷ <b id="points">0</b></span><button id="shop-open" class="soft">SHOP</button></div>
+  </header>
+  <main>
+    <section class="aquarium-card">
+      <div class="tank-top">
+        <div><span class="eyebrow">WATER QUALITY</span><div class="quality"><i id="quality-bar"></i></div></div>
+        <strong id="quality-label">きれい</strong>
+      </div>
+      <div id="canvas-wrap" aria-label="魚マーパンの水槽"></div>
+      <div class="care-bar">
+        <button id="water-change">水換え <small id="conditioner-count">カルキ抜き ×1</small></button>
+        <span class="care-hint">苔は水槽をこすって、休符はタップしてお掃除</span>
+      </div>
+    </section>
+    <section class="piano-card">
+      <div><p class="eyebrow">SOUND FOOD</p><h2>音をあげる</h2><p>鍵盤を弾くと、音符が水の中へ漂います。</p></div>
+      <div id="piano" class="piano" aria-label="音符の鍵盤"></div>
+    </section>
+  </main>
+  <dialog id="shop">
+    <form method="dialog" class="shop-head"><div><p class="eyebrow">AQUARIUM SHOP</p><h2>水槽のおみせ</h2></div><button class="close" aria-label="閉じる">×</button></form>
+    <p class="shop-points">使えるおんぷ <b id="shop-points">0</b></p>
+    <div id="shop-grid" class="shop-grid"></div>
+  </dialog>
+  <div id="toast" aria-live="polite"></div>
+  <script src="sketch.js"></script>
+</body>
+</html>
