@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f2f0ea">
+  <meta name="description" content="漫画で使える1頭身・2頭身・3頭身マーパンの身体構造とポーズを比較するデザイン検討ページ">
+  <title>Ma-pan Proportions Study</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="title-block">
+        <p class="issue">MA-PAN DESIGN STUDY · 070</p>
+        <h1>マーパンの頭身</h1>
+        <p class="lead">饅頭のかたちはそのままに、漫画の中で動ける身体を考える。</p>
+      </div>
+      <nav class="ratio-tabs" aria-label="頭身を選ぶ">
+        <button type="button" data-ratio="1">1頭身</button>
+        <button type="button" data-ratio="2" class="active" aria-pressed="true">2頭身</button>
+        <button type="button" data-ratio="3">3頭身</button>
+      </nav>
+    </header>
+
+    <section class="study-note" aria-label="デザイン方針">
+      <span id="ratio-number">02</span>
+      <p><strong id="ratio-title">マーパンの頭 ＋ 同じ大きさの体</strong><br><span id="ratio-copy">頭と同程度の丸い体をつなぎ、体から短い手足を生やした漫画向けの基本形。</span></p>
+      <div class="legend"><i></i> 本体 <i></i> 手足 <i></i> 3つ目</div>
+    </section>
+
+    <section class="pose-board">
+      <div id="sketch" aria-label="12種類のマーパンのポーズ一覧"></div>
+    </section>
+
+    <footer>
+      <p>POSE SHEET / FRONT · SIDE · WALK · RUN · SIT · SLEEP · WAVE · POINT · HOLD · FALL · ARMS CROSSED · TROUBLED</p>
+      <p>口なし / ミトン型の手 / 丸い素足</p>
+    </footer>
+  </main>
+  <script src="../64_CoffeeMill/vendor/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

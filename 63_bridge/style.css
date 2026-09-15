@@ -1,0 +1,17 @@
+:root{--paper:#f5efe2;--ink:#292724;--muted:#847b70;--accent:#e46d50}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body,main,#sketch{width:100%;height:100%;margin:0;overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:"Avenir Next","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;user-select:none;overscroll-behavior:none}
+canvas{display:block;touch-action:none;cursor:grab}canvas.dragging{cursor:grabbing}
+header{position:fixed;z-index:4;left:max(18px,env(safe-area-inset-left));right:max(18px,env(safe-area-inset-right));top:max(15px,env(safe-area-inset-top));display:flex;align-items:flex-start;justify-content:space-between;pointer-events:none}
+h1{font-size:clamp(12px,1.4vw,16px);letter-spacing:.17em;margin:0 0 5px;font-weight:850}
+#bridge-name{margin:0;font-size:12px;font-weight:700;letter-spacing:.06em}#bridge-name span{font-size:10px;color:var(--muted);font-weight:500;margin-left:6px}
+nav{pointer-events:auto;position:absolute;left:50%;top:0;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;width:min(720px,72vw);padding:4px;background:#fffaf1cf;border:1px solid #4f473b18;border-radius:20px;box-shadow:0 5px 24px #5f51331c;backdrop-filter:blur(8px)}
+button{font:inherit;border:0;cursor:pointer}.bridge-button{white-space:nowrap;background:transparent;color:#81786c;border-radius:99px;padding:8px 14px;font-size:11px;letter-spacing:.04em;transition:.2s}.bridge-button:hover{color:var(--ink)}.bridge-button.active{background:#312e2a;color:#fff;box-shadow:0 2px 8px #302b2533}
+#reset{pointer-events:auto;background:transparent;color:var(--muted);font-size:10px;letter-spacing:.14em;padding:7px}
+#hint{position:fixed;z-index:3;left:50%;bottom:max(17px,env(safe-area-inset-bottom));transform:translateX(-50%);margin:0;color:#746b61;font-size:10px;letter-spacing:.08em;white-space:nowrap;pointer-events:none;transition:opacity .4s}
+#hint.hidden{opacity:0}
+#status{position:fixed;z-index:3;left:50%;top:88px;transform:translateX(-50%);min-height:24px;padding:5px 12px;border-radius:20px;color:#9b594a;font-size:11px;letter-spacing:.08em;pointer-events:none;opacity:0;transition:opacity .25s;background:#fff8edc9}#status.show{opacity:1}
+@media(max-width:680px){header{left:12px;right:10px;top:10px}#bridge-name span{display:none}nav{top:48px;width:94vw}.bridge-button{padding:7px 8px;font-size:9px}#status{top:119px}}
+@media(max-height:560px){h1{display:none}#bridge-name{padding-top:5px}nav{top:0}#status{top:49px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}

@@ -1,0 +1,39 @@
+:root { color-scheme: dark; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body, main { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body {
+  background: #01040a;
+  color: rgba(228, 240, 250, .82);
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", system-ui, sans-serif;
+  user-select: none;
+}
+canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+.title {
+  position: fixed; z-index: 2; top: max(23px, env(safe-area-inset-top)); left: 26px;
+  display: flex; align-items: baseline; gap: 9px; pointer-events: none;
+  color: rgba(225, 238, 250, .68); letter-spacing: .22em;
+}
+.title span { font-size: 13px; font-weight: 500; }
+.title small { font-size: 9px; letter-spacing: .18em; opacity: .52; }
+.hint {
+  position: fixed; z-index: 2; left: 50%; bottom: max(22px, env(safe-area-inset-bottom));
+  margin: 0; transform: translateX(-50%); pointer-events: none;
+  color: rgba(215, 231, 244, .48); font-size: 12px; letter-spacing: .16em;
+  transition: opacity .8s ease;
+}
+.hint.is-hidden { opacity: 0; }
+.planet-name {
+  position: fixed; z-index: 2; left: 50%; bottom: max(46px, calc(env(safe-area-inset-bottom) + 24px));
+  min-height: 20px; transform: translateX(-50%); pointer-events: none;
+  color: rgba(238, 246, 255, .88); font-size: 13px; letter-spacing: .16em;
+  opacity: 0; transition: opacity .25s ease;
+}
+.planet-name.is-visible { opacity: 1; }
+@media (max-width: 700px) {
+  .title { left: 18px; top: max(17px, env(safe-area-inset-top)); }
+  .hint { bottom: max(14px, env(safe-area-inset-bottom)); }
+  .planet-name { bottom: max(37px, calc(env(safe-area-inset-bottom) + 23px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hint, .planet-name { transition: none; }
+}

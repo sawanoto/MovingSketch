@@ -1,0 +1,11 @@
+:root{--ink:#253338;--paper:#eaf8f7;--blue:#55bfe0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--paper);font-family:"Hiragino Maru Gothic ProN","Yu Gothic",system-ui,sans-serif;touch-action:none}
+main,#canvas-wrap{position:fixed;inset:0}
+canvas{display:block;width:100%!important;height:100%!important}
+.tray{position:fixed;z-index:5;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:7px;padding:8px;border:2px solid rgba(37,51,56,.16);border-radius:22px;background:rgba(255,255,255,.76);box-shadow:0 8px 26px rgba(44,91,101,.14);backdrop-filter:blur(10px);max-width:calc(100vw - 22px);overflow-x:auto;touch-action:pan-x}
+.item{border:0;width:clamp(48px,7vw,62px);height:clamp(48px,7vw,62px);border-radius:16px;background:#fff;color:var(--ink);font-size:25px;box-shadow:inset 0 -3px 0 rgba(37,51,56,.1);cursor:grab;flex:0 0 auto;display:grid;place-items:center}
+.item:active{transform:translateY(2px);box-shadow:none}.item span{font-size:9px;font-weight:800;display:block;margin-top:-6px}
+.sound{position:fixed;z-index:6;right:14px;top:14px;width:42px;height:42px;border:2px solid rgba(37,51,56,.25);border-radius:50%;background:rgba(255,255,255,.78);color:var(--ink);font:bold 20px system-ui;cursor:pointer}
+.sound.off{opacity:.42;text-decoration:line-through}
+@media(max-height:560px){.tray{padding:5px;gap:4px}.item{width:43px;height:43px;font-size:21px;border-radius:12px}.item span{display:none}}

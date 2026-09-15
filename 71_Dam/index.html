@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#dceef3">
+  <meta name="description" content="マーパンを沈めて、4種類のダムが水圧を受け止める仕組みを体験するインタラクティブ作品">
+  <title>MA-PAN DAM LAB</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="brand"><h1>MA-PAN DAM LAB</h1><p id="dam-note">重さで、どっしり支える</p></div>
+      <div class="header-actions">
+        <button id="pressure-toggle" type="button" aria-pressed="true">水圧 ON</button>
+        <button id="sound-toggle" type="button" aria-pressed="true" aria-label="音を切り替える">♪</button>
+        <button id="reset" type="button">RESET</button>
+      </div>
+    </header>
+    <nav id="dam-picker" aria-label="ダム形式を選ぶ"></nav>
+    <section id="stage-wrap">
+      <div id="sketch" aria-label="ダムの水圧実験"></div>
+      <div id="result" hidden>
+        <p>ダムが決壊しました</p>
+        <div><button id="again" type="button">もう一度</button><button id="choose" type="button">別のダムを試す</button></div>
+      </div>
+    </section>
+    <footer>
+      <p id="hint">水面をタップして、マーパンを落としてみよう</p>
+      <div class="sizes" aria-label="追加するマーパンの大きさ">
+        <button class="size-button active" data-size="small" type="button">ちいさい</button>
+        <button class="size-button" data-size="large" type="button">おおきい</button>
+        <button class="size-button giant" data-size="giant" type="button">巨大</button>
+      </div>
+    </footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

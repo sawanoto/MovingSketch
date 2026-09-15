@@ -105,6 +105,7 @@ function resetGame(nextState) {
     radius: constrain(min(width, height) * 0.04, 22, 30), velocity: 0,
     marpan: new Marpan25D({ maxSize: 72, yaw: 0.78, bodyColor: "#fff8e8" })
   };
+  player.marpan.setEyeStyle(1, "beak", "#f6e819");
   player.marpan.enableAutoBlink(1800, 3400);
   walls = [];
   particles = [];

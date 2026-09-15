@@ -1,0 +1,19 @@
+:root{--paper:#f3eddf;--ink:#2e2b27;--muted:#81796e;--blue:#4b8794;--orange:#df7053;--panel:#fffaf0dc}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body,main,#sketch{width:100%;height:100%;margin:0;overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:"Avenir Next","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;user-select:none;overscroll-behavior:none}
+canvas{display:block;touch-action:none}
+header{position:fixed;z-index:5;top:max(15px,env(safe-area-inset-top));left:max(20px,env(safe-area-inset-left));right:max(20px,env(safe-area-inset-right));display:flex;justify-content:space-between;pointer-events:none}
+h1{margin:0 0 4px;font-size:clamp(12px,1.4vw,16px);letter-spacing:.17em;font-weight:850}.brand p{margin:0;color:var(--muted);font-size:10px;letter-spacing:.12em}
+button{font:inherit;border:0;cursor:pointer}#reset{pointer-events:auto;background:transparent;color:var(--muted);font-size:10px;letter-spacing:.14em;padding:8px}
+#wing-picker{position:fixed;z-index:5;top:18px;left:50%;transform:translateX(-50%);display:flex;gap:3px;padding:4px;border:1px solid #4f473b18;border-radius:24px;background:var(--panel);box-shadow:0 5px 24px #5f51331c;backdrop-filter:blur(8px)}
+.wing-btn{white-space:nowrap;border-radius:99px;padding:8px 12px;background:transparent;color:#81786c;font-size:9px;letter-spacing:.045em;transition:.2s}.wing-btn:hover{color:var(--ink)}.wing-btn.active{background:#312e2a;color:white;box-shadow:0 2px 8px #302b2533}
+.controls{position:fixed;z-index:5;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:25px;width:min(680px,calc(100vw - 28px));padding:13px 18px;border:1px solid #4f473b18;border-radius:18px;background:var(--panel);box-shadow:0 8px 30px #5f513326;backdrop-filter:blur(9px)}
+.controls label{flex:1;min-width:0}.controls span{display:flex;justify-content:space-between;margin-bottom:7px;color:var(--muted);font-size:9px;letter-spacing:.14em}.controls b{color:var(--ink);font-size:11px}
+input[type=range]{width:100%;height:4px;margin:0;appearance:none;border-radius:3px;background:#d4cbbb;outline:0}input[type=range]::-webkit-slider-thumb{appearance:none;width:17px;height:17px;border:4px solid #fff9ef;border-radius:50%;background:var(--blue);box-shadow:0 1px 5px #2d342f44}
+.passengers{width:120px}.passengers>span{margin-bottom:5px}.passengers>div{display:flex;gap:5px}.passengers button{width:38px;height:29px;border-radius:8px;background:#e8dfcf;color:var(--ink);font-size:17px}.passengers button:active{transform:translateY(1px);background:#ddd0bc}
+#message{position:fixed;z-index:4;left:50%;top:79px;transform:translateX(-50%);margin:0;padding:6px 13px;border-radius:20px;background:#fff8edba;color:#846b5f;font-size:10px;letter-spacing:.08em;pointer-events:none;transition:.25s}
+@media(max-width:760px){header{top:10px;left:12px;right:8px}.brand p{display:none}#wing-picker{top:49px;width:96vw;justify-content:center}.wing-btn{padding:7px 8px;font-size:8px}#message{top:89px}.controls{gap:12px;padding:11px 12px}.passengers{width:95px}}
+@media(max-width:480px){.controls{flex-wrap:wrap}.controls label{flex-basis:42%}.passengers{width:100%;display:flex;align-items:center;justify-content:space-between}.passengers>span{margin:0}.passengers button{height:27px}.controls{bottom:8px}}
+@media(max-height:590px){.brand{display:none}#wing-picker{top:8px}#message{top:49px}.controls{bottom:7px;padding:8px 14px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}

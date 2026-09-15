@@ -30,5 +30,6 @@
   { "number": "30", "title": "Ma-pan: Bread", "description": "パンの種類や焼き上がりによるマーパンの形・色・質感を見比べ、再利用する2.5Dカタログです。", "path": "./30_Bread/" },
   { "number": "32", "title": "Ma-pan: Family", "description": "6体の家族マーパンを、表情・視線・身長差とともに見比べるキャラクターカタログです。", "path": "./32_Family/" },
   { "number": "34", "title": "Eating Notes", "description": "現実の音やドレミを食べさせて、色と世界を変えながらマーパンを育てます。", "path": "./34_Eatingnotes/" }
-  ,{ "number": "33", "title": "Ma-pan: Beat Clicker", "description": "マーパンを叩いて音符と演奏会場を育てるリズムクリッカーです。", "path": "./33_CookieClicker/" }
+  ,{ "number": "33", "title": "Ma-pan: Beat Clicker", "description": "マーパンを叩いて音符と演奏会場を育てるリズムクリッカーです。", "path": "./33_CookieClicker/" },
+  { "number": "45", "title": "Ma-pan: Shape Lab", "description": "16種類の柔らかな輪郭を、マーパンらしさと積木としての特徴から比較する形の研究ページです。", "path": "./45_Shape/" }
 ]

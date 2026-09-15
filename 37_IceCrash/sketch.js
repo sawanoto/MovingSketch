@@ -1,5 +1,35 @@
 const BREAK_TAPS = 7;
 const SAVE_KEY = "ice-crash-pictures-v1";
+const COPY = Object.freeze({
+  ja: {
+    title: "アイスクラッシュ",
+    gameLabel: "氷をタップして、中にいるキャラクターを見つけるゲーム",
+    guide: "こおりを タップ！",
+    guideSub: "＋ で しゃしんも はいります",
+    resetLabel: "追加した写真をリセット",
+    resetText: "しゃしん",
+    photoLabel: "写真を追加",
+    againLabel: "もう一回遊ぶ",
+    againText: "もういっかい",
+    confirmReset: "追加した写真をすべて消しますか？",
+    toggle: "EN",
+    toggleLabel: "Switch to English"
+  },
+  en: {
+    title: "Ice Crash",
+    gameLabel: "Tap the ice to discover the character inside",
+    guide: "TAP THE ICE!",
+    guideSub: "Use + to add your photos",
+    resetLabel: "Reset added photos",
+    resetText: "PHOTOS",
+    photoLabel: "Add photos",
+    againLabel: "Play again",
+    againText: "PLAY AGAIN",
+    confirmReset: "Remove all added photos?",
+    toggle: "JA",
+    toggleLabel: "日本語に切り替える"
+  }
+});
 const FAMILY_PRIZES = ["mama","papa","child","baby","grandpa","grandma"].map(type=>({kind:"family",type}));
 const PICTURE_CHANCE = .82;
 const FAMILY_OPTIONS = {
@@ -11,6 +41,7 @@ let activeCharacter, hitCount = 0, state = "ice", shake = 0, revealStarted = 0;
 let cracks = [], particles = [], sparkles = [], slabs = [], savedImages = [], activePicture = null;
 let audioCtx, masterGain, againButton, hint;
 let roundId = 0;
+let language = "ja";
 
 function setup() {
   const canvas = createCanvas(windowWidth, windowHeight);
@@ -220,12 +251,37 @@ function wireControls() {
   document.querySelector("#image-input").addEventListener("change", importImages);
   document.querySelector("#photo-button").addEventListener("click",e=>e.stopPropagation());
   document.querySelector("#reset-photos").addEventListener("click",resetPictures);
+  document.querySelector("#language-button").addEventListener("click",e=>{e.stopPropagation();setLanguage(language === "ja" ? "en" : "ja");});
+  setLanguage(language);
+}
+
+function setLanguage(nextLanguage) {
+  language = nextLanguage;
+  const copy = COPY[language];
+  const languageButton = document.querySelector("#language-button");
+  const resetButton = document.querySelector("#reset-photos");
+  const photoButton = document.querySelector("#photo-button");
+  const guide = document.querySelector("#top-guide");
+  document.documentElement.lang = language;
+  document.title = copy.title;
+  document.querySelector("#game").setAttribute("aria-label", copy.gameLabel);
+  guide.querySelector("b").textContent = copy.guide;
+  guide.querySelector("small").textContent = copy.guideSub;
+  resetButton.setAttribute("aria-label", copy.resetLabel);
+  resetButton.title = copy.resetLabel;
+  resetButton.querySelector("small").textContent = copy.resetText;
+  photoButton.setAttribute("aria-label", copy.photoLabel);
+  againButton.setAttribute("aria-label", copy.againLabel);
+  againButton.querySelector("small").textContent = copy.againText;
+  languageButton.textContent = copy.toggle;
+  languageButton.setAttribute("aria-label", copy.toggleLabel);
+  languageButton.setAttribute("aria-pressed", String(language === "en"));
 }
 
 function resetPictures(event){
   event.stopPropagation();
   if(!savedImages.length)return;
-  if(!window.confirm("追加した写真をすべて消しますか？"))return;
+  if(!window.confirm(COPY[language].confirmReset))return;
   savedImages=[];
   try{localStorage.removeItem(SAVE_KEY);}catch(e){}
   syncResetButton();

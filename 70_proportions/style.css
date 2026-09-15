@@ -1,0 +1,20 @@
+:root{--paper:#f2f0ea;--ink:#171817;--muted:#72736e;--line:#cbc9c1;--accent:#e34a32;--panel:#faf9f5}
+*{box-sizing:border-box}
+html{background:var(--paper);color:var(--ink);font-family:"Helvetica Neue","Yu Gothic",Meiryo,sans-serif}
+body{margin:0;min-width:320px}
+main{width:min(1440px,100%);margin:auto;padding:clamp(20px,4vw,58px)}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;border-top:5px solid var(--ink);padding-top:18px}
+.issue{margin:0 0 8px;font:700 .76rem/1.2 monospace;letter-spacing:.18em;color:var(--accent)}
+h1{margin:0;font-size:clamp(2.15rem,5vw,4.8rem);line-height:.95;letter-spacing:-.08em}
+.lead{margin:16px 0 0;font-size:clamp(.9rem,1.5vw,1.05rem);color:var(--muted)}
+.ratio-tabs{display:flex;border:1px solid var(--ink);background:var(--panel);flex:none}
+.ratio-tabs button{min-width:86px;border:0;border-right:1px solid var(--ink);padding:13px 18px;background:transparent;color:var(--ink);font:700 .95rem/1 inherit;cursor:pointer}
+.ratio-tabs button:last-child{border-right:0}.ratio-tabs button:hover{background:#e5e3dc}.ratio-tabs button.active{background:var(--ink);color:white}
+.study-note{margin-top:28px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;border-block:1px solid var(--line);padding:13px 0}
+#ratio-number{font:900 2.2rem/1 monospace;color:var(--accent)}.study-note p{margin:0;font-size:.9rem;line-height:1.55}.study-note strong{font-size:1.03rem}.study-note p span{color:var(--muted)}
+.legend{font:700 .72rem/1.5 monospace;color:var(--muted);white-space:nowrap}.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 3px 0 10px;background:var(--ink)}.legend i:nth-child(2){background:var(--accent)}.legend i:nth-child(3){background:#f3c83c}
+.pose-board{margin-top:22px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 40px rgba(25,25,20,.06)}
+#sketch{width:100%;min-height:720px}canvas{display:block;width:100%!important;height:auto!important}
+footer{display:flex;justify-content:space-between;gap:20px;border-bottom:5px solid var(--ink);padding:14px 0;color:var(--muted);font:700 .66rem/1.5 monospace;letter-spacing:.07em}footer p{margin:0}
+@media(max-width:760px){main{padding:18px}header{display:block}.ratio-tabs{margin-top:22px;width:100%}.ratio-tabs button{min-width:0;flex:1}.study-note{grid-template-columns:auto 1fr}.legend{display:none}#sketch{min-height:1050px}footer{display:block}.lead{line-height:1.5}}
+@media(max-width:420px){.ratio-tabs button{padding-inline:8px}.study-note{gap:12px}#ratio-number{font-size:1.7rem}}

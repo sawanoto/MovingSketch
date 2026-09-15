@@ -1,0 +1,18 @@
+.lang-toggle {
+  min-width: 44px;
+  padding-inline: 12px;
+  border: 1px solid #b9d9d4;
+  background: #effaf7;
+  color: #397873;
+}
+
+.lang-toggle:focus-visible {
+  outline: 3px solid #65b8b566;
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  header { align-items: flex-start; }
+  .header-stats { gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .header-stats > span { flex-basis: 100%; text-align: right; }
+}

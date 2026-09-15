@@ -1,0 +1,21 @@
+:root { color-scheme: light; font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", system-ui, sans-serif; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #eeeae3; color: #292824; }
+body { min-height: 100svh; overflow-x: hidden; }
+main { min-height: 100svh; display: grid; grid-template-rows: auto minmax(360px, 1fr) auto; padding: max(18px, env(safe-area-inset-top)) clamp(14px, 3vw, 38px) max(18px, env(safe-area-inset-bottom)); }
+header { position: relative; z-index: 2; pointer-events: none; }
+.series { margin: 0 0 3px; font: 700 10px/1.2 ui-monospace, monospace; letter-spacing: .18em; opacity: .45; }
+h1 { margin: 0; font-size: clamp(18px, 3vw, 26px); letter-spacing: .06em; }
+#stage { position: relative; min-height: 360px; overflow: hidden; border-radius: 28px; touch-action: none; user-select: none; -webkit-user-select: none; }
+#canvasHost, canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; cursor: crosshair; }
+#canvasHost { z-index: 1; }
+.hint, #sound, #debug { z-index: 2; }
+.hint { position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); white-space: nowrap; padding: 8px 13px; border-radius: 99px; color: #35332e; background: rgba(255,255,255,.58); font-size: clamp(11px, 2vw, 13px); letter-spacing: .05em; pointer-events: none; transition: opacity .35s; }
+.hint.used { opacity: 0; }
+#sound { position: absolute; top: 8px; right: 8px; border: 0; border-radius: 99px; padding: 8px 11px; background: rgba(255,255,255,.62); color: #393730; font: 700 11px/1 system-ui; cursor: pointer; backdrop-filter: blur(6px); }
+#sound:focus-visible { outline: 2px solid #8074bd; outline-offset: 2px; }
+#debug { position: absolute; left: 8px; top: 8px; padding: 8px; border-radius: 8px; color: #fff; background: rgba(0,0,0,.66); font: 11px/1.45 ui-monospace, monospace; pointer-events: none; }
+.help { margin: 10px 0 0; text-align: center; font-size: clamp(10px, 2vw, 12px); opacity: .5; letter-spacing: .04em; }
+.help span { margin-left: .7em; }
+@media (max-width: 560px) { main { grid-template-rows: auto minmax(390px, 1fr) auto; } .help span { display: block; margin: 3px 0 0; } #stage { border-radius: 20px; } }
+@media (prefers-reduced-motion: reduce) { .hint { transition: none; } }

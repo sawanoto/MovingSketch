@@ -40,4 +40,5 @@ window.MOVING_SKETCH_WORKS = [
   {number:39,title:"Lava Lamp",thumbnail:"./39_lavalamp/thumbnail.webp",url:"./39_lavalamp/",tags:["p5.js","Generative"],description:"ゆっくり形を変える光を眺めるスケッチ。"},
   {number:40,title:"Story Generator",thumbnail:"./40_StoryGen/thumbnail.webp",url:"./40_StoryGen/",tags:["p5.js","Story"],description:"画面の中から物語が生まれるジェネレーター。"},
   {number:41,title:"Othello",thumbnail:"./41_Othello/thumbnail.webp",url:"./41_Othello/",tags:["JavaScript","Game"],description:"ブラウザで遊べるオセロゲーム。"}
+  ,{number:46,title:"Ma-pan: Tower",thumbnail:"./46_Tower/thumbnail.webp",url:"./46_Tower/",date:"2026-09-05",tags:["JavaScript","Game","Sound","Physics"],description:"マーパンを積み、塔を下から上へ演奏する物理音楽ゲーム。"}
 ];

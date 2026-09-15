@@ -1,0 +1,18 @@
+:root{color-scheme:light;--ink:#302b27;--paper:#f3ead8;--coral:#e66f55}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body,main,#sketch{width:100%;height:100%;margin:0;overflow:hidden}
+body{background:var(--paper);font-family:"Avenir Next","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);user-select:none;overscroll-behavior:none}
+canvas{display:block;touch-action:none;cursor:grab}canvas.dragging{cursor:grabbing}
+header{position:fixed;z-index:2;top:max(17px,env(safe-area-inset-top));left:max(20px,env(safe-area-inset-left));display:flex;align-items:center;gap:12px;pointer-events:none}
+h1{font-size:clamp(13px,1.5vw,17px);letter-spacing:.16em;margin:0;font-weight:800}
+#status{font-size:10px;letter-spacing:.12em;color:#80766a;background:#fff9edaa;border-radius:99px;padding:5px 9px;transition:.25s}
+#status.bad{color:#ba4c3f;background:#fff0e9}#status.fix{color:#4c806a;background:#ebf6e9}
+.actions{position:fixed;z-index:3;left:50%;bottom:max(23px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:9px}
+button{font:inherit;border:0;cursor:pointer;color:var(--ink)}
+#add{height:50px;padding:0 20px;border-radius:28px;background:#fffaf0;box-shadow:0 5px 0 #d9cbb5,0 10px 25px #79694d26;display:flex;gap:8px;align-items:center;font-size:12px;letter-spacing:.08em;transition:transform .15s,box-shadow .15s}
+#add b{font-size:24px;font-weight:400;line-height:1}#add:hover{transform:translateY(-2px)}#add:active{transform:translateY(4px);box-shadow:0 1px 0 #d9cbb5}
+.quiet{height:38px;border-radius:20px;padding:0 15px;background:#5c8d76;color:#fff;font-size:11px;letter-spacing:.08em;box-shadow:0 4px 14px #315e4930}.quiet[hidden]{display:none}
+#reset{position:fixed;z-index:3;right:max(18px,env(safe-area-inset-right));top:max(18px,env(safe-area-inset-top));background:transparent;color:#8b8175;font-size:10px;letter-spacing:.12em;padding:6px}
+#hint{position:fixed;z-index:2;left:50%;bottom:max(84px,calc(env(safe-area-inset-bottom) + 84px));transform:translateX(-50%);margin:0;white-space:nowrap;font-size:11px;letter-spacing:.08em;color:#8a7e70;pointer-events:none;transition:opacity .5s}
+@media(max-width:560px){header{top:14px;left:14px}#reset{top:14px;right:10px}#hint{font-size:10px}.actions{bottom:18px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}

@@ -11,14 +11,15 @@
 <body>
   <header>
     <p class="eyebrow">MARPAN SHADOW / 36</p>
-    <h1>マーパンの影</h1>
+    <h1 id="title">マーパンの影</h1>
   </header>
+  <button id="language-toggle" type="button" aria-label="Switch to English" aria-pressed="false">EN</button>
   <div class="time-card" aria-live="polite">
     <span id="period">朝</span>
     <i></i>
     <b id="clock">06:00</b>
   </div>
-  <p class="guide">太陽の高さと、影の姿を眺めてみよう<br><small>クリック・タップ：一時停止</small></p>
+  <p class="guide" id="guide">太陽の高さと、影の姿を眺めてみよう<br><small>クリック・タップ：一時停止</small></p>
   <script src="../shared/marpan-25d.js"></script>
   <script src="sketch.js"></script>
 </body>

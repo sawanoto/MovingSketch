@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#f3eddf">
+  <meta name="description" content="翼・迎角・風・マーパンの重さを試す、揚力のインタラクティブ実験作品">
+  <title>MA-PAN FLIGHT LAB</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="brand"><h1>MA-PAN FLIGHT LAB</h1><p>風に、かたちをあずける。</p></div>
+      <button id="reset" type="button">RESET</button>
+    </header>
+    <section id="wing-picker" aria-label="翼を選ぶ"></section>
+    <div id="sketch" aria-label="マーパン風洞実験"></div>
+    <section class="controls" aria-label="実験操作">
+      <label><span>ANGLE <b id="angle-value">6°</b></span><input id="angle" type="range" min="-6" max="24" value="6" step="1"></label>
+      <label><span>WIND <b id="wind-value">40</b></span><input id="wind" type="range" min="0" max="100" value="40" step="1"></label>
+      <div class="passengers"><span>MA-PAN <b id="count-value">1</b></span><div><button id="minus" type="button" aria-label="マーパンを減らす">−</button><button id="plus" type="button" aria-label="マーパンを増やす">＋</button></div></div>
+    </section>
+    <p id="message" aria-live="polite">風を強くして、浮かせてみよう</p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

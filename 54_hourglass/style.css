@@ -1,0 +1,28 @@
+:root { color-scheme: light; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body {
+  background: #f3efe6;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", system-ui, sans-serif;
+  touch-action: manipulation;
+}
+main, #canvas-wrap, canvas { position: fixed; inset: 0; width: 100%; height: 100%; }
+canvas { display: block; }
+button { font: inherit; }
+.sound-start {
+  position: fixed; z-index: 3; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  padding: 12px 20px; border: 1px solid rgba(42, 51, 56, .16); border-radius: 999px;
+  color: #344047; background: rgba(255, 255, 255, .84); box-shadow: 0 8px 28px rgba(48, 43, 34, .13);
+  backdrop-filter: blur(9px); cursor: pointer; letter-spacing: .05em;
+  transition: opacity .35s, transform .35s;
+}
+.sound-start.is-hidden { opacity: 0; transform: translate(-50%, -45%); pointer-events: none; }
+.flip {
+  position: fixed; z-index: 2; left: 50%; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; padding: 0; border: 1px solid rgba(42, 51, 56, .13); border-radius: 50%;
+  color: #344047; background: rgba(255, 255, 255, .72); box-shadow: 0 6px 22px rgba(48, 43, 34, .1);
+  backdrop-filter: blur(8px); cursor: pointer; transition: opacity .25s, transform .2s;
+}
+.flip span { display: block; font-size: 25px; line-height: 40px; }
+.flip:active:not(:disabled) { transform: translateY(-50%) scale(.9); }
+.flip:disabled { opacity: .25; cursor: default; }

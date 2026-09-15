@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#111516">
+  <meta name="description" content="流れてくる三つ目のマーパン杭を、高さに関係なくひたすら打つインタラクティブ作品。">
+  <title>HAMMEREDOWN — Ma-pan</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+</head>
+<body>
+  <main>
+    <div id="sketch" aria-label="右から左へ流れる三つ目のマーパン杭を、クリックまたはタップで打ち込む作品"></div>
+    <button id="auto" type="button" aria-pressed="false"><span class="lamp" aria-hidden="true"></span>AUTO <b>OFF</b></button>
+    <p id="hint">杭をたたく</p>
+  </main>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

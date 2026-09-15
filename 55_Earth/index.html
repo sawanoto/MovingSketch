@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#020712">
+  <meta name="description" content="理想化された地球と実際の地球の、ごく小さな違いに触れるインタラクティブ作品。">
+  <title>EARTH MA-PAN</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <canvas id="earth" aria-label="ゆっくり自転する、三つ目の地球マーパン"></canvas>
+    <section class="controls" aria-label="理想と現実の表示調整">
+      <div class="scale-row">
+        <button id="amplify" type="button" aria-label="地球の形の差を強調する">差を強調</button>
+        <output id="scale" aria-live="polite">実寸</output>
+      </div>
+      <div class="range-row">
+        <span>現実</span>
+        <input id="reality" type="range" min="0" max="1" step="0.001" value="1" aria-label="現実から理想まで">
+        <span>理想</span>
+      </div>
+    </section>
+  </main>
+  <script src="sketch.js"></script>
+</body>
+</html>

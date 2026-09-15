@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#f1ede4">
+  <meta name="description" content="3つの黒目だけで、すっとぼけながら集中するマーパンの排泄表情を描くインタラクティブ作品。">
+  <title>Ma-pan: Poop Pause</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p>MARPAN PLAY LAB / 44</p>
+      <h1>うんちの間</h1>
+    </header>
+    <section id="stage" aria-label="うんちをするマーパン">
+      <div id="canvasHost"></div>
+      <div class="caption" id="caption" aria-live="polite">マーパンを押してみよう</div>
+      <button id="cleanButton" type="button" aria-label="休符のうんちをすべて片付ける">キレイにする</button>
+    </section>
+    <p class="help">クリック / タップ / Space　<span>黒目だけで生まれる、妙な集中。</span></p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

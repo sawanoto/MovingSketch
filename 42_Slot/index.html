@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#17152a">
+  <title>マーパン・ミュージックスロット</title>
+  <meta name="description" content="三つの目をタイミングよく止めて、音符を集めるマーパンの音楽スロット。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game" id="game">
+    <header class="topbar">
+      <div><p class="eyebrow">MARPAN MUSIC LAB / 42</p><h1>ミュージックスロット</h1></div>
+      <button id="soundButton" class="sound" type="button" aria-pressed="true" aria-label="音を切り替える">♪ ON</button>
+    </header>
+
+    <section class="hud" aria-label="ゲーム情報">
+      <div class="notes"><span>おんぷ</span><strong id="notes">♪ 120</strong></div>
+      <div class="stats">
+        <span>SCORE <b id="score">0</b></span><span>777 <b id="sevens">0</b></span>
+        <span>BEST FEVER <b id="bestFever">0</b></span><span>HIGH <b id="highScore">0</b></span>
+      </div>
+    </section>
+
+    <section class="stage" id="stage" aria-label="マーパンのスロット">
+      <div class="ambience" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="fever-orbit" aria-hidden="true"><i>♪</i><i>★</i><i>♪</i><i>★</i><i>♪</i><i>★</i></div>
+      <div id="feverBadge" class="fever-badge" hidden><b>FEVER</b><span>のこり <strong id="feverLeft">10</strong></span></div>
+      <div id="debugPanel" class="debug-panel" hidden><b>DEBUG</b><span id="debugReadout">D: OFF</span></div>
+      <div id="message" class="message" aria-live="polite">マーパンをさわって 音符をあつめよう</div>
+      <div id="canvasWrap"></div>
+      <div id="eyeButtons" class="eyes" aria-label="三つの目のリール">
+        <button class="eye" data-reel="0" type="button" aria-label="左目を止める"><span class="reel-window"></span></button>
+        <button class="eye" data-reel="1" type="button" aria-label="中央の目を止める"><span class="reel-window"></span></button>
+        <button class="eye" data-reel="2" type="button" aria-label="右目を止める"><span class="reel-window"></span></button>
+      </div>
+      <button id="bodyTap" class="body-tap" type="button" aria-label="マーパンを触って音符をもらう"></button>
+      <button id="lever" class="lever" type="button" aria-label="レバーを引いてスロットを始める">
+        <span class="lever-base"></span><span class="lever-arm"></span><span class="lever-orb">♪</span><small>♪ 10</small>
+      </button>
+      <div id="particles" class="particles" aria-hidden="true"></div>
+    </section>
+
+    <section class="keyboard" aria-label="ドレミ鍵盤">
+      <button data-note="0">ド</button><button data-note="1">レ</button><button data-note="2">ミ</button><button data-note="3">ファ</button>
+      <button data-note="4">ソ</button><button data-note="5">ラ</button><button data-note="6">シ</button><button data-note="7">ド</button>
+    </section>
+    <details class="paytable">
+      <summary>配当表を見る <span>FEVER中は音符・SCORE 2倍</span></summary>
+      <div class="paytable-wrap">
+        <table>
+          <thead><tr><th>そろった役</th><th>条件</th><th>獲得音符</th><th>SCORE</th></tr></thead>
+          <tbody>
+            <tr class="jackpot"><th><b>7</b> <b>7</b> <b>7</b></th><td>7が3つ</td><td>♪ 300</td><td>+1,800</td></tr>
+            <tr><th>Replay × 3</th><td>Replayが3つ</td><td>次の1回無料</td><td>基本点</td></tr>
+            <tr><th class="note-role">♪ ♪ ♪</th><td>音符が3つ</td><td>♪ 65</td><td>+300</td></tr>
+            <tr><th class="star-role">★ ★ ★</th><td>星が3つ</td><td>♪ 35</td><td>+180</td></tr>
+            <tr><th>🍉 スイカ</th><td>2つ以上</td><td>♪ 22</td><td>+100</td></tr>
+            <tr><th>🍒 チェリー</th><td>2つ以上</td><td>♪ 12</td><td>+60</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>各スピンに基本20点と、停止タイミングに応じた小さなボーナスが加算されます。</p>
+    </details>
+    <section class="body-shop" aria-labelledby="shopTitle">
+      <div class="shop-heading"><div><p class="eyebrow">MARPAN BODY SHOP</p><h2 id="shopTitle">ボディをアップデート</h2></div><span>音符でカラーを追加</span></div>
+      <div id="bodyShopItems" class="shop-items"></div>
+    </section>
+    <p class="help"><b>あそびかた</b> レバーを引いたら、回っている3つの目を好きな順でタップ！</p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

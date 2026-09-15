@@ -1,5 +1,5 @@
 const SETTINGS = Object.freeze({
-  daySeconds: 30,
+  daySeconds: 15,
   sunriseX: 0.08,
   sunsetX: 0.92,
   horizonY: 0.61,
@@ -16,6 +16,24 @@ let dayProgress = 0;
 let paused = false;
 let periodNode;
 let clockNode;
+let language = "ja";
+
+const COPY = Object.freeze({
+  ja: {
+    title: "マーパンの影",
+    guide: "太陽の高さと、影の姿を眺めてみよう<br><small>クリック・タップ：一時停止</small>",
+    periods: ["朝", "昼", "夕方"],
+    toggle: "EN",
+    toggleLabel: "Switch to English"
+  },
+  en: {
+    title: "Marpan's Shadow",
+    guide: "Watch the sun move and the shadow change<br><small>Click / tap: pause</small>",
+    periods: ["MORNING", "NOON", "EVENING"],
+    toggle: "JA",
+    toggleLabel: "日本語に切り替える"
+  }
+});
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -26,6 +44,11 @@ function setup() {
   marpan.enableAutoBlink(2600, 5100);
   periodNode = document.querySelector("#period");
   clockNode = document.querySelector("#clock");
+  document.querySelector("#language-toggle").addEventListener("click", (event) => {
+    event.stopPropagation();
+    setLanguage(language === "ja" ? "en" : "ja");
+  });
+  setLanguage(language);
 }
 
 function draw() {
@@ -183,7 +206,22 @@ function updateClock(t) {
   const hour = floor(totalMinutes / 60);
   const minute = totalMinutes % 60;
   clockNode.textContent = `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
-  periodNode.textContent = t < 0.28 ? "朝" : t < 0.68 ? "昼" : "夕方";
+  const periods = COPY[language].periods;
+  periodNode.textContent = t < 0.28 ? periods[0] : t < 0.68 ? periods[1] : periods[2];
+}
+
+function setLanguage(nextLanguage) {
+  language = nextLanguage;
+  const copy = COPY[language];
+  const toggle = document.querySelector("#language-toggle");
+  document.documentElement.lang = language;
+  document.title = copy.title;
+  document.querySelector("#title").textContent = copy.title;
+  document.querySelector("#guide").innerHTML = copy.guide;
+  toggle.textContent = copy.toggle;
+  toggle.setAttribute("aria-label", copy.toggleLabel);
+  toggle.setAttribute("aria-pressed", String(language === "en"));
+  updateClock(dayProgress);
 }
 
 function smoothstep(value) {

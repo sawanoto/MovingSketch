@@ -1,0 +1,18 @@
+:root{--ink:#27231f;--paper:#fff8e9;--shadow:#dfceb1}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","Yu Gothic",system-ui,sans-serif;touch-action:manipulation}
+body{background:radial-gradient(circle at 50% 38%,#fffdf7 0 24%,#fff6df 62%,#f5e5c5 100%)}
+main{height:100dvh;display:grid;grid-template-rows:auto 1fr auto;position:relative}
+header{text-align:center;padding:clamp(12px,2.2vh,24px) 16px 0;z-index:2;pointer-events:none}
+h1{font-size:clamp(17px,2.3vw,25px);letter-spacing:.04em;margin:0;font-weight:850}
+header p{font-size:clamp(12px,1.8vw,16px);letter-spacing:.08em;margin:5px 0 0;color:#776b5a;font-weight:700}
+#canvas-wrap{position:relative;min-height:0}
+#canvas-wrap canvas{display:block;width:100%!important;height:100%!important}
+.keys{display:grid;grid-template-columns:repeat(8,1fr);width:min(94vw,760px);height:clamp(88px,18vh,142px);margin:0 auto max(12px,env(safe-area-inset-bottom));padding:0 4px 7px;gap:clamp(3px,.7vw,7px);z-index:5}
+.key{appearance:none;border:3px solid var(--ink);border-bottom-width:7px;border-radius:0 0 15px 15px;background:#fffefa;color:var(--ink);font:900 clamp(14px,2.4vw,22px)/1 system-ui,sans-serif;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding:0 2px 13px;position:relative;box-shadow:0 6px 0 var(--shadow);transition:transform 80ms,box-shadow 80ms,background 80ms;touch-action:none}
+.key::before{content:"";position:absolute;left:13%;right:13%;top:10px;height:8px;border-radius:99px;background:var(--note);opacity:.75}
+.key:is(:active,.pressed){transform:translateY(6px);box-shadow:0 0 0 var(--shadow);background:color-mix(in srgb,var(--note) 19%,white)}
+.key:focus-visible{outline:4px solid var(--note);outline-offset:2px}
+@media(max-height:560px){header{position:absolute;width:100%;padding-top:7px}.keys{height:78px;margin-bottom:5px}.key{padding-bottom:8px}}
+@media(max-width:480px){.keys{width:98vw;gap:2px;padding-inline:2px}.key{border-width:2px;border-bottom-width:6px;border-radius:0 0 10px 10px}}
+@media(prefers-reduced-motion:reduce){.key{transition:none}}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#f3ead8">
+  <meta name="description" content="マーパンをつないで、記録の連鎖を体で感じるインタラクティブ作品">
+  <title>MA-PAN CHAIN</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header><h1>MA-PAN CHAIN</h1><span id="status">つながってる</span></header>
+    <div id="sketch"></div>
+    <div class="actions">
+      <button id="repair" class="quiet" type="button" hidden>つなぎなおす</button>
+      <button id="add" type="button"><b>＋</b><span>マーパン</span></button>
+    </div>
+    <button id="reset" type="button">RESET</button>
+    <p id="hint">マーパンをさわると、記録が見える</p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

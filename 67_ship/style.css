@@ -1,0 +1,17 @@
+:root{--sky:#e8f1f0;--ink:#263238;--muted:#687c80;--panel:#f9fbf6df;--sea:#4b91a0;--accent:#e06e4f}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body,main,#sketch{width:100%;height:100%;margin:0;overflow:hidden}
+body{background:var(--sky);color:var(--ink);font-family:"Avenir Next","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;user-select:none;overscroll-behavior:none}
+canvas{display:block;touch-action:none;cursor:grab}canvas.dragging{cursor:grabbing}
+header{position:fixed;z-index:6;top:max(15px,env(safe-area-inset-top));left:max(20px,env(safe-area-inset-left));right:max(20px,env(safe-area-inset-right));display:flex;justify-content:space-between;pointer-events:none}
+h1{margin:0 0 4px;font-size:clamp(12px,1.4vw,16px);letter-spacing:.17em;font-weight:850}.brand p{margin:0;color:var(--muted);font-size:10px;letter-spacing:.1em}
+button{font:inherit;border:0;cursor:pointer}#reset{pointer-events:auto;background:transparent;color:var(--muted);font-size:10px;letter-spacing:.14em;padding:8px}
+#ship-picker{position:fixed;z-index:6;top:17px;left:50%;transform:translateX(-50%);display:flex;gap:3px;padding:4px;border:1px solid #334b5018;border-radius:24px;background:var(--panel);box-shadow:0 5px 24px #35545a1d;backdrop-filter:blur(9px)}
+.ship-btn{white-space:nowrap;border-radius:99px;padding:8px 13px;background:transparent;color:#66797c;font-size:10px;letter-spacing:.045em;transition:.2s}.ship-btn:hover{color:var(--ink)}.ship-btn.active{background:#26363a;color:white;box-shadow:0 2px 8px #1e303536}
+#readout{position:fixed;z-index:5;left:max(18px,env(safe-area-inset-left));bottom:max(18px,env(safe-area-inset-bottom));width:148px;padding:11px 13px;border-radius:14px;background:#f8fbf4d9;border:1px solid #38545a17;box-shadow:0 6px 25px #29484c1b;backdrop-filter:blur(8px);pointer-events:none}
+#readout div{display:flex;justify-content:space-between;gap:10px;padding:4px 0;font-size:10px;letter-spacing:.05em;color:var(--muted)}#readout b{color:var(--ink);font-weight:750;white-space:nowrap}
+#hint,#message{position:fixed;z-index:5;left:50%;transform:translateX(-50%);margin:0;padding:6px 13px;border-radius:20px;background:#f9fbf4c7;color:#587076;font-size:10px;letter-spacing:.08em;pointer-events:none;transition:opacity .3s}
+#hint{bottom:max(20px,env(safe-area-inset-bottom))}#hint.hidden{opacity:0}#message{top:76px;opacity:0;color:#a5533e}#message.show{opacity:1}
+@media(max-width:760px){header{top:9px;left:11px;right:7px}.brand p{display:none}#ship-picker{top:46px;width:96vw;justify-content:center}.ship-btn{padding:7px 8px;font-size:8px}#message{top:84px}#readout{left:9px;bottom:9px;width:132px;padding:8px 10px}#hint{right:8px;left:auto;transform:none;bottom:12px;max-width:50vw;text-align:right}}
+@media(max-height:580px){.brand{display:none}#ship-picker{top:7px}#message{top:48px}#readout{bottom:7px}#hint{bottom:8px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
