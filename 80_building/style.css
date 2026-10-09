@@ -1,0 +1,18 @@
+:root{--paper:#eee9dc;--ink:#26332f;--muted:#78827b;--stone:#b7a889;--gold:#e9ae45}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body,main,#sketch{width:100%;height:100%;margin:0;overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:"Avenir Next","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;user-select:none;overscroll-behavior:none}
+canvas{display:block;touch-action:none;cursor:grab}canvas.dragging{cursor:grabbing}
+header{position:fixed;z-index:5;left:max(18px,env(safe-area-inset-left));right:max(18px,env(safe-area-inset-right));top:max(16px,env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}
+.brand{pointer-events:none}.brand span{display:block;font-size:9px;letter-spacing:.23em;font-weight:800;color:var(--muted)}h1{font-size:clamp(19px,2.3vw,31px);line-height:1;margin:5px 0 0;letter-spacing:.15em;font-weight:550}
+nav{pointer-events:auto;position:absolute;left:50%;top:0;transform:translateX(-50%);display:flex;padding:4px;border:1px solid #5f594b24;border-radius:18px;background:#f8f3e8d9;box-shadow:0 7px 28px #483e2e14;backdrop-filter:blur(9px)}
+button{font:inherit;border:0;cursor:pointer}.type{padding:8px 12px;border-radius:14px;background:transparent;color:#746e63;font-size:10px;white-space:nowrap}.type.active{background:var(--ink);color:#fff}
+#reset{pointer-events:auto;padding:8px 4px;background:transparent;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.16em}
+#controls{position:fixed;z-index:5;left:max(18px,env(safe-area-inset-left));top:91px;width:158px;padding:13px 14px 11px;border:1px solid #5f594b20;border-radius:15px;background:#f8f3e8d5;backdrop-filter:blur(9px);box-shadow:0 7px 25px #51442d10}
+#controls label{display:grid;grid-template-columns:1fr;gap:4px;margin:0 0 10px;color:#5f655f;font-size:9px;font-weight:700;letter-spacing:.09em}input[type=range]{width:100%;height:3px;margin:2px 0 0;accent-color:#52655b}
+#controls button{display:flex;align-items:center;gap:7px;width:100%;padding:7px 2px;background:transparent;color:#5f655f;font-size:9px;font-weight:800;letter-spacing:.08em;text-align:left}#controls button i{width:24px;height:13px;padding:2px;border-radius:9px;background:#aaa89f;transition:.2s}#controls button i:after{content:"";display:block;width:9px;height:9px;border-radius:50%;background:#fff;transition:.2s}#controls button[aria-pressed=true] i{background:#536d61}#controls button[aria-pressed=true] i:after{transform:translateX(11px)}
+#hint{position:fixed;z-index:4;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);margin:0;color:#736e64;font-size:10px;letter-spacing:.1em;pointer-events:none;white-space:nowrap;transition:opacity .35s}#hint.hidden{opacity:0}
+#message{position:fixed;z-index:4;left:50%;top:82px;transform:translateX(-50%);min-height:26px;padding:6px 13px;border-radius:16px;background:#fff9edcf;color:#9b5848;font-size:10px;font-weight:700;letter-spacing:.07em;opacity:0;transition:.25s;pointer-events:none}#message.show{opacity:1}
+@media(max-width:760px){header{left:12px;right:10px;top:10px}.brand h1{font-size:17px}nav{top:46px;width:calc(100vw - 18px);justify-content:center}.type{flex:1;padding:7px 4px;font-size:8px}#controls{top:91px;left:10px;width:134px;padding:10px 11px}#message{top:128px;max-width:48vw;text-align:center}}
+@media(max-height:600px){.brand h1{display:none}nav{top:0}#controls{top:48px}#message{top:46px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}

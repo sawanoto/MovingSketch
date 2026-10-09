@@ -1,0 +1,2 @@
+.language-button { position:absolute; z-index:11; top:16px; left:64px; min-width:46px; padding:10px 12px; border:1px solid var(--line); border-radius:999px; background:rgba(255,253,242,.88); box-shadow:0 5px 16px rgba(23,54,75,.12); backdrop-filter:blur(8px); font-size:11px; font-weight:900; letter-spacing:.08em; cursor:pointer; }
+@media (max-width:520px) { .language-button { top:12px; left:58px; } }

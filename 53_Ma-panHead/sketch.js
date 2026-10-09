@@ -1,48 +1,42 @@
 const SOURCE_WIDTH = 887;
 const SOURCE_HEIGHT = 1774;
-
-// Generated portrait-space coordinates. All drawing is transformed with the image.
-const HEAD = { x: 444, y: 216, w: 150, h: 102 };
-const EYES = [
-  { x: 414, y: 216 },
-  { x: 444, y: 216 },
-  { x: 474, y: 216 }
-];
+const HEAD_BOTTOM_Y = 267;
+const HEAD_WIDTHS = { small: 150, medium: 195, large: 240 };
+const CONFETTI_COLORS = ["#ef476f", "#ffd166", "#06d6a0", "#118ab2", "#8f63d9", "#ff8c42"];
 
 let portrait;
-let gazeX = 0;
-let gazeY = 0;
-let targetGazeX = 0;
-let targetGazeY = 0;
-let nextBlinkAt = 0;
-let blinkStartedAt = -1;
+let marpan;
+let currentExpression = "pupil";
+let currentSize = "small";
+let displayedHeadWidth = HEAD_WIDTHS.small;
+let targetGazeX = SOURCE_WIDTH * 0.5;
+let targetGazeY = SOURCE_HEIGHT * 0.2;
+let tapCount = 0;
+let lastHeadTapAt = -1000;
+let confetti = [];
 
-function preload() {
-  portrait = loadImage("ma-pan-head.png");
-}
+function preload() { portrait = loadImage("ma-pan-head.png"); }
 
 function setup() {
   const canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("canvas-wrap");
   pixelDensity(min(window.devicePixelRatio || 1, 2));
   imageMode(CORNER);
-  targetGazeX = width * 0.5;
-  targetGazeY = height * 0.5;
-  nextBlinkAt = millis() + random(2200, 4400);
+  marpan = new Marpan25D({ bodyColor: "#ffffff", expression: currentExpression, autoBlink: true });
+  marpan.enableAutoBlink(2400, 4800);
+  setupControls();
 }
 
 function draw() {
   background(255);
   const frame = getPortraitFrame();
   image(portrait, frame.x, frame.y, frame.w, frame.h);
-
-  updateGaze(frame);
-  updateBlink();
-
+  displayedHeadWidth = lerp(displayedHeadWidth, HEAD_WIDTHS[currentSize], 0.14);
   push();
   translate(frame.x, frame.y);
   scale(frame.scale);
-  drawAnimatedHead();
+  drawCleanNeckAndHead();
+  updateAndDrawConfetti();
   pop();
 }
 
@@ -50,143 +44,119 @@ function getPortraitFrame() {
   const scaleValue = min(width / SOURCE_WIDTH, height / SOURCE_HEIGHT) * 0.97;
   const w = SOURCE_WIDTH * scaleValue;
   const h = SOURCE_HEIGHT * scaleValue;
-  return {
-    x: (width - w) * 0.5,
-    y: (height - h) * 0.5,
-    w,
-    h,
-    scale: scaleValue
-  };
+  return { x: (width - w) * 0.5, y: (height - h) * 0.5, w, h, scale: scaleValue };
 }
 
-function updateGaze(frame) {
-  const headScreenX = frame.x + HEAD.x * frame.scale;
-  const headScreenY = frame.y + HEAD.y * frame.scale;
-  const dx = targetGazeX - headScreenX;
-  const dy = targetGazeY - headScreenY;
-  const distanceValue = max(1, sqrt(dx * dx + dy * dy));
-  const strength = min(1, distanceValue / 95);
-
-  const wantedX = (dx / distanceValue) * strength;
-  const wantedY = (dy / distanceValue) * strength;
-  gazeX = lerp(gazeX, wantedX, 0.12);
-  gazeY = lerp(gazeY, wantedY, 0.12);
-}
-
-function updateBlink() {
-  if (blinkStartedAt < 0 && millis() >= nextBlinkAt) startBlink();
-  if (blinkStartedAt >= 0 && millis() - blinkStartedAt > 300) {
-    blinkStartedAt = -1;
-    nextBlinkAt = millis() + random(2400, 5200);
-  }
-}
-
-function blinkAmount() {
-  if (blinkStartedAt < 0) return 0;
-  const t = (millis() - blinkStartedAt) / 300;
-  if (t < 0.36) return easeInOut(t / 0.36);
-  if (t < 0.58) return 1;
-  return 1 - easeInOut((t - 0.58) / 0.42);
-}
-
-function easeInOut(t) {
-  const clamped = constrain(t, 0, 1);
-  return clamped * clamped * (3 - 2 * clamped);
-}
-
-function startBlink() {
-  if (blinkStartedAt < 0) blinkStartedAt = millis();
-}
-
-function drawAnimatedHead() {
-  // Erase the generated head and all skin at the neck before redrawing them.
+function drawCleanNeckAndHead() {
   noStroke();
   fill(255);
-  rect(365, 138, 158, 135);
+  rect(312, 88, 264, 184);
+  rect(432, 248, 24, 73);
+  const bodyW = displayedHeadWidth;
+  const bodyH = bodyW * 0.68;
+  const centerY = HEAD_BOTTOM_Y - bodyH * 0.5;
+  marpan.setExpression(currentExpression);
+  marpan.lookAt(targetGazeX, targetGazeY);
+  marpan.drawAt(444, centerY, { bodyWidth: bodyW, bodyHeight: bodyH });
+  if (currentExpression === "crying") drawTears(444, centerY, bodyW, bodyH);
+}
 
-  // The neck is deliberately pure white: no skin color remains visible.
-  stroke(205);
-  strokeWeight(1.2);
-  fill(255);
-  quad(432, 254, 456, 254, 456, 321, 432, 321);
+function drawTears(cx, cy, bodyW, bodyH) {
+  const fall = (millis() * 0.00045) % 1;
+  drawTear(cx - bodyW * 0.17, cy + bodyH * (0.13 + fall * 0.25), bodyW * 0.033);
+  drawTear(cx + bodyW * 0.17, cy + bodyH * (0.13 + ((fall + 0.5) % 1) * 0.25), bodyW * 0.033);
+}
 
-  // Canonical Ma-pan outline: body height is 68% of its width.
-  const bodyW = HEAD.w;
-  const bodyH = HEAD.h;
-  const cx = HEAD.x;
-  const cy = HEAD.y;
-  const waist = bodyH * 0.2;
-
-  stroke(18);
-  strokeWeight(2.2);
-  strokeJoin(ROUND);
-  fill(255);
+function drawTear(x, y, size) {
+  noStroke();
+  fill(60, 166, 226, 220);
   beginShape();
-  vertex(cx, cy - bodyH * 0.5);
-  bezierVertex(cx + bodyW * 0.27, cy - bodyH * 0.5, cx + bodyW * 0.5, cy - bodyH * 0.25, cx + bodyW * 0.48, cy + waist);
-  bezierVertex(cx + bodyW * 0.46, cy + bodyH * 0.46, cx + bodyW * 0.25, cy + bodyH * 0.5, cx, cy + bodyH * 0.5);
-  bezierVertex(cx - bodyW * 0.25, cy + bodyH * 0.5, cx - bodyW * 0.46, cy + bodyH * 0.46, cx - bodyW * 0.48, cy + waist);
-  bezierVertex(cx - bodyW * 0.5, cy - bodyH * 0.25, cx - bodyW * 0.26, cy - bodyH * 0.5, cx, cy - bodyH * 0.5);
+  vertex(x, y - size);
+  bezierVertex(x + size * 0.75, y, x + size * 0.48, y + size, x, y + size);
+  bezierVertex(x - size * 0.48, y + size, x - size * 0.75, y, x, y - size);
   endShape(CLOSE);
-
-  const closed = blinkAmount();
-  for (const eye of EYES) drawEye(eye.x, eye.y, closed);
 }
 
-function drawEye(x, y, closed) {
-  const eyeW = 28.5;
-  const eyeH = max(1.5, 30.8 * (1 - closed));
-
-  stroke(46, 46, 46);
-  strokeWeight(1.15);
-  fill(249);
-  ellipse(x, y, eyeW, eyeH);
-
-  if (closed > 0.78) return;
-
-  const pupilScaleY = max(0.15, 1 - closed);
-  noStroke();
-  fill(22);
-  ellipse(
-    x + gazeX * 5.6,
-    y + gazeY * 5.1,
-    14.8,
-    14.8 * pupilScaleY
-  );
+function setupControls() {
+  document.querySelectorAll("[data-expression]").forEach((button) => button.addEventListener("click", () => {
+    currentExpression = button.dataset.expression;
+    marpan.setExpression(currentExpression);
+    marpan.bounce(0.25);
+    setActiveButton("[data-expression]", button);
+  }));
+  document.querySelectorAll("[data-size]").forEach((button) => button.addEventListener("click", () => {
+    currentSize = button.dataset.size;
+    marpan.bounce(0.18);
+    setActiveButton("[data-size]", button);
+  }));
 }
 
-function setTarget(x, y) {
-  targetGazeX = constrain(x, 0, width);
-  targetGazeY = constrain(y, 0, height);
+function setActiveButton(selector, selected) {
+  document.querySelectorAll(selector).forEach((button) => {
+    const active = button === selected;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function setTarget(screenX, screenY) {
+  const frame = getPortraitFrame();
+  targetGazeX = (screenX - frame.x) / frame.scale;
+  targetGazeY = (screenY - frame.y) / frame.scale;
   document.body.classList.add("has-moved");
 }
 
-function mouseMoved() {
-  setTarget(mouseX, mouseY);
+function isInsideHead(screenX, screenY) {
+  const frame = getPortraitFrame();
+  const x = (screenX - frame.x) / frame.scale;
+  const y = (screenY - frame.y) / frame.scale;
+  const bodyH = displayedHeadWidth * 0.68;
+  const centerY = HEAD_BOTTOM_Y - bodyH * 0.5;
+  const nx = (x - 444) / (displayedHeadWidth * 0.5);
+  const ny = (y - centerY) / (bodyH * 0.5);
+  return nx * nx + ny * ny <= 1.08;
 }
 
-function mouseDragged() {
-  setTarget(mouseX, mouseY);
-  return false;
+function registerHeadTap() {
+  if (!isInsideHead(mouseX, mouseY)) { tapCount = 0; return; }
+  const now = millis();
+  tapCount = now - lastHeadTapAt <= 650 ? tapCount + 1 : 1;
+  lastHeadTapAt = now;
+  marpan.bounce(0.24);
+  if (tapCount >= 3) { launchConfetti(); tapCount = 0; }
 }
 
-function mousePressed() {
-  setTarget(mouseX, mouseY);
-  startBlink();
-  return false;
+function launchConfetti() {
+  const topY = HEAD_BOTTOM_Y - displayedHeadWidth * 0.68;
+  for (let i = 0; i < 90; i++) confetti.push({ x: 444 + random(-displayedHeadWidth * 0.18, displayedHeadWidth * 0.18), y: topY + random(-8, 7), vx: random(-3.7, 3.7), vy: random(-8.5, -3.1), gravity: random(0.12, 0.2), size: random(4, 9), angle: random(TWO_PI), spin: random(-0.22, 0.22), color: random(CONFETTI_COLORS), life: 255 });
 }
 
-function touchMoved() {
-  setTarget(mouseX, mouseY);
-  return false;
+function updateAndDrawConfetti() {
+  for (let i = confetti.length - 1; i >= 0; i--) {
+    const piece = confetti[i];
+    piece.x += piece.vx;
+    piece.y += piece.vy;
+    piece.vy += piece.gravity;
+    piece.vx *= 0.995;
+    piece.angle += piece.spin;
+    piece.life -= 2.2;
+    push();
+    translate(piece.x, piece.y);
+    rotate(piece.angle);
+    noStroke();
+    const pieceColor = color(piece.color);
+    pieceColor.setAlpha(constrain(piece.life, 0, 255));
+    fill(pieceColor);
+    rectMode(CENTER);
+    rect(0, 0, piece.size, piece.size * 0.58, 1);
+    pop();
+    if (piece.life <= 0 || piece.y > SOURCE_HEIGHT) confetti.splice(i, 1);
+  }
 }
 
-function touchStarted() {
-  setTarget(mouseX, mouseY);
-  startBlink();
-  return false;
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+function mouseMoved() { setTarget(mouseX, mouseY); }
+function mouseDragged() { setTarget(mouseX, mouseY); return false; }
+function mousePressed() { setTarget(mouseX, mouseY); registerHeadTap(); return false; }
+function touchMoved() { setTarget(mouseX, mouseY); return false; }
+function touchStarted() { setTarget(mouseX, mouseY); registerHeadTap(); return false; }
+function windowResized() { resizeCanvas(windowWidth, windowHeight); }

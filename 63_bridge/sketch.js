@@ -16,12 +16,50 @@ const SIZES=[
   {key:"large",label:"おおきい",w:78,h:55,weight:4.2,color:"#f8edda"},
   {key:"giant",label:"きょだい",w:108,h:74,weight:7.4,color:"#efe0c7"}
 ];
+const EN={
+  bridges:{
+    beam:["Beam bridge","A straight span carries the load"],
+    truss:["Truss bridge","Triangles distribute the force"],
+    arch:["Arch bridge","The arch carries force to both banks"],
+    cable:["Cable-stayed bridge","Cables carry force to the towers"],
+    throughArch:["Through-arch bridge","The arch above carries force to both banks"],
+    warren:["Warren truss bridge","Force travels through repeating triangles"],
+    frame:["Rigid-frame bridge","Deck and piers resist together"],
+    cantilever:["Cantilever bridge","Both sides reach toward the center"]
+  },
+  sizes:{small:"small",normal:"medium",large:"large",giant:"giant"},
+  hint:"Drag a Ma-pan from below onto the bridge",
+  reset:"A new bridge is ready",
+  switch:"Compare with the same arrangement",
+  collapse:"The bridge could not hold the load",
+  recover:"The bridge is back"
+};
 let bridgeType="beam",bridge,buns=[],dragging=null,dragDX=0,dragDY=0,nextId=1;
 let stress=0,targetStress=0,wobble=0,flow=null,collapsed=false,collapseAt=0,shake=0,audioCtx=null,statusTimer=0;
+let language="ja";
+
+function bridgeText(type){return language==="en"?EN.bridges[type]:[TYPES[type].label,TYPES[type].tag]}
+function updateLanguage(){
+  const english=language==="en",button=document.getElementById("language");
+  document.documentElement.lang=language;
+  document.querySelector('meta[name="description"]').content=english?"Place Ma-pan on different bridges to explore how structures carry loads.":"マーパンを載せて、橋の構造による力の伝わり方を体験するインタラクティブ作品";
+  const [label,tag]=bridgeText(bridgeType);
+  document.getElementById("bridge-name").innerHTML=`${label} <span>${tag}</span>`;
+  document.querySelector("nav").setAttribute("aria-label",english?"Bridge types":"橋の種類");
+  document.querySelectorAll(".bridge-button").forEach(b=>b.textContent=bridgeText(b.dataset.bridge)[0]);
+  document.getElementById("hint").textContent=english?EN.hint:"下のマーパンを、橋の好きなところへ";
+  document.getElementById("sketch").setAttribute("aria-label",english?"Bridge experiment":"橋の実験場");
+  document.getElementById("reset").setAttribute("aria-label",english?"Reset placement":"配置をリセット");
+  document.getElementById("status").classList.remove("show");
+  button.textContent=english?"JP":"EN";
+  button.setAttribute("aria-label",english?"日本語に切り替え":"Switch to English");
+  button.setAttribute("aria-pressed",String(english));
+}
 
 function setup(){
   const c=createCanvas(windowWidth,windowHeight);c.parent("sketch");pixelDensity(min(devicePixelRatio||1,2));
   document.querySelectorAll(".bridge-button").forEach(b=>b.onclick=()=>switchBridge(b.dataset.bridge));
+  document.getElementById("language").onclick=()=>{language=language==="ja"?"en":"ja";updateLanguage()};
   document.getElementById("reset").onclick=()=>{unlockAudio();resetAll()};layout();makeTray();
 }
 function layout(){
@@ -33,17 +71,17 @@ function makeBun(size,x,y,tray=true){
   return{id:nextId++,size:s.key,s,actor:new Marpan25D({maxSize:s.w,bodyColor:s.color,autoBlink:true}),x,y,homeX:x,homeY:y,onBridge:!tray,tray,falling:false,vx:0,vy:0,rot:0,landed:0};
 }
 function makeTray(){
-  buns=[];const items=width<620?["small","normal","large","giant"]:["small","small","normal","normal","large","large","giant"];
+  buns=[];const items=["small","normal","large","giant"];
   const span=min(width*.76,700),start=width/2-span/2,gap=span/max(1,items.length-1),base=height-max(54,height*.075);
   items.forEach((key,i)=>{const s=SIZES.find(q=>q.key===key),x=items.length===1?width/2:start+i*gap;buns.push(makeBun(key,x,base-s.h*.5,true))});
 }
-function resetAll(){collapsed=false;stress=targetStress=wobble=shake=0;flow=null;makeTray();setStatus("新しい橋です",800)}
+function resetAll(){collapsed=false;stress=targetStress=wobble=shake=0;flow=null;makeTray();setStatus(language==="en"?EN.reset:"新しい橋です",800)}
 function switchBridge(type){
   if(type===bridgeType)return;bridgeType=type;collapsed=false;stress=targetStress=wobble=shake=0;flow=null;
   buns.filter(b=>b.onBridge).forEach(b=>{b.falling=false;b.vx=b.vy=b.rot=0});
   document.querySelectorAll(".bridge-button").forEach(b=>b.classList.toggle("active",b.dataset.bridge===type));
-  document.getElementById("bridge-name").innerHTML=`${TYPES[type].label} <span>${TYPES[type].tag}</span>`;
-  setStatus("同じ配置で、くらべてみよう",1500);recalculate();
+  const [label,tag]=bridgeText(type);document.getElementById("bridge-name").innerHTML=`${label} <span>${tag}</span>`;
+  setStatus(language==="en"?EN.switch:"同じ配置で、くらべてみよう",1500);recalculate();
 }
 function localInfluence(nx,type=bridgeType){
   const center=1-abs(nx-.5)*2;
@@ -90,8 +128,8 @@ function updateWorld(){
   });
   if(collapsed&&millis()-collapseAt>2600)recover();
 }
-function collapseBridge(){collapsed=true;collapseAt=millis();flow=null;shake=9;sound("break");setStatus("橋が耐えきれませんでした",2200);buns.filter(b=>b.onBridge).forEach(b=>{b.onBridge=false;b.falling=true;b.vx=random(-55,55);b.vy=random(20,90)});targetStress=0}
-function recover(){collapsed=false;stress=wobble=shake=0;setStatus("橋がもどりました",900)}
+function collapseBridge(){collapsed=true;collapseAt=millis();flow=null;shake=9;sound("break");setStatus(language==="en"?EN.collapse:"橋が耐えきれませんでした",2200);buns.filter(b=>b.onBridge).forEach(b=>{b.onBridge=false;b.falling=true;b.vx=random(-55,55);b.vy=random(20,90)});targetStress=0}
+function recover(){collapsed=false;stress=wobble=shake=0;setStatus(language==="en"?EN.recover:"橋がもどりました",900)}
 function draw(){updateWorld();drawBackground();push();translate(random(-shake,shake),random(-shake,shake)*.4);drawStructure(false);drawFlow();drawDeck();pop();drawBuns();drawTrayLabels()}
 function drawBackground(){
   background("#f5efe2");noStroke();fill("#e7d8bd");rect(0,bridge.bankY,width,height-bridge.bankY);
@@ -158,7 +196,7 @@ function drawFlow(){
 }
 function drawBuns(){buns.filter(b=>b!==dragging).forEach(drawBun);if(dragging)drawBun(dragging)}
 function drawBun(b){const bob=b.tray&&!b.falling?sin(millis()*.002+b.id)*1.2:0;push();translate(b.x,b.y+bob);rotate(b.rot);b.actor.lookAt(mouseX,mouseY);b.actor.drawAt(0,0,{bodyWidth:b.s.w,bodyHeight:b.s.h,bodyColor:b.s.color,scaleY:b===dragging?.94:1,scaleX:b===dragging?1.05:1});pop()}
-function drawTrayLabels(){noStroke();fill(70,63,55,115);textAlign(CENTER,CENTER);textSize(9);buns.filter(b=>b.tray&&!b.falling).forEach(b=>text(b.s.label,b.x,height-17))}
+function drawTrayLabels(){noStroke();fill(70,63,55,115);textAlign(CENTER,CENTER);textSize(9);buns.filter(b=>b.tray&&!b.falling).forEach(b=>text(language==="en"?EN.sizes[b.size]:b.s.label,b.x,height-17))}
 function pick(x,y){return buns.slice().reverse().find(b=>!b.falling&&abs(x-b.x)<b.s.w*.62&&abs(y-b.y)<b.s.h*.7)}
 function mousePressed(){unlockAudio();const b=pick(mouseX,mouseY);if(!b)return false;dragging=b;dragDX=mouseX-b.x;dragDY=mouseY-b.y;b.onBridge=false;b.tray=false;b.falling=false;recalculate();document.querySelector("canvas").classList.add("dragging");return false}
 function mouseDragged(){if(!dragging)return false;dragging.x=mouseX-dragDX;dragging.y=mouseY-dragDY;dragging.rot=lerp(dragging.rot,0,.2);return false}

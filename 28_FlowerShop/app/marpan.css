@@ -1,0 +1,123 @@
+/* Five BreadMarpan variants adapted from ../30_Bread/bread-marpan.js. */
+.marupan {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 30px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 2.5px solid #121212;
+  border-radius: 48% 48% 43% 43% / 53% 53% 45% 45%;
+  box-shadow: 0 3px 0 #6b463055;
+}
+.bread-decor { position: absolute; inset: 0; pointer-events: none; }
+.bread-eyes { position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; }
+.bread-eyes i {
+  display: block;
+  position: relative;
+  width: 8px;
+  height: 9px;
+  margin-left: -1px;
+  border: 1px solid #121212;
+  border-radius: 50%;
+  background: #fff;
+}
+.bread-eyes i:first-child { margin-left: 0; }
+.bread-eyes i::after {
+  content: "";
+  position: absolute;
+  left: 2.5px;
+  top: 3px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #121212;
+}
+
+.marupan.burnt {
+  background: linear-gradient(180deg,#4d2515 0%,#7a401f 22%,#b4652b 50%,#e19d49 77%,#ffcd77 100%);
+}
+.marupan.croissant {
+  height: 26px;
+  border-radius: 50% 50% 42% 42% / 62% 62% 35% 35%;
+  background: linear-gradient(180deg,#c86f27,#e69432 32%,#f7bd57 72%,#ffda7b);
+}
+.marupan.croissant .bread-decor {
+  background: repeating-linear-gradient(75deg,transparent 0 8px,#914b1d99 9px 10px,transparent 11px 15px);
+  opacity: .72;
+}
+.marupan.melon {
+  background:
+    repeating-linear-gradient(72deg,transparent 0 9px,#d38b25aa 10px 11px,transparent 12px 17px),
+    repeating-linear-gradient(-8deg,transparent 0 9px,#d38b25aa 10px 11px,transparent 12px 17px),
+    radial-gradient(circle at 35% 25%,#fff49a,#f7d45d 55%,#dea12f);
+}
+.marupan.toast {
+  height: 34px;
+  border-radius: 35% 35% 16% 16% / 38% 38% 13% 13%;
+  background: linear-gradient(180deg,#c8752f,#df9647 52%,#b9662c);
+}
+.marupan.toast .bread-decor {
+  inset: 3px;
+  border: 1px solid #975221b8;
+  border-radius: 34% 34% 13% 13% / 36% 36% 11% 11%;
+  background: radial-gradient(circle at 40% 25%,#fff9cc,#f8e8a6 65%,#edcb78);
+}
+.marupan.pizza {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 26% 30%,#d94146 0 7%,transparent 8%),
+    radial-gradient(circle at 72% 30%,#d94146 0 7%,transparent 8%),
+    radial-gradient(circle at 29% 72%,#d94146 0 7%,transparent 8%),
+    radial-gradient(circle at 72% 70%,#d94146 0 7%,transparent 8%),
+    radial-gradient(circle,#fff0a8 0 56%,#c9362d 57% 69%,#efa24e 70% 86%,#c97832 87%);
+}
+.marupan.pizza .bread-decor::before,
+.marupan.pizza .bread-decor::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  border-top: 2px solid #27a94f;
+  border-radius: 50%;
+}
+.marupan.pizza .bread-decor::before { left: 5px; top: 5px; transform: rotate(18deg); }
+.marupan.pizza .bread-decor::after { right: 4px; bottom: 5px; transform: rotate(-20deg); }
+
+.marupan.small { width: 29px; height: 20px; border-width: 2px; box-shadow: 0 2px 0 #6b463044; }
+.marupan.small.croissant { height: 18px; }
+.marupan.small.toast { height: 24px; }
+.marupan.small.pizza { width: 23px; height: 23px; }
+.marupan.small .bread-eyes i { width: 5.5px; height: 6.5px; }
+.marupan.small .bread-eyes i::after { left: 1.5px; top: 2px; width: 2px; height: 2px; }
+
+/* Bread shipping boxes replace fraction counters. */
+.cell.crate {
+  position: relative;
+  overflow: hidden;
+  padding: 3px;
+  border: 2px solid #70472e;
+  background: linear-gradient(32deg,transparent 47%,#d9a367 48% 52%,transparent 53%),linear-gradient(145deg,#c68b50 0 49%,#ae713e 50% 100%);
+  box-shadow: inset -4px -4px 0 #70472e24,inset 3px 3px 0 #efc68d55,0 2px 0 #70472e;
+}
+.cell.crate::before { content:""; position:absolute; inset:6px -8px auto; height:2px; background:#81543366; transform:rotate(-5deg); }
+.bread-box { position:relative; z-index:1; display:grid; place-items:center; width:100%; height:100%; }
+.bread-box .box-tape { position:absolute; inset:-8px auto; width:9px; background:#e2bd7a99; border-inline:1px dashed #98683e99; }
+.bread-box b { position:relative; display:grid; place-items:center; width:30px; height:24px; border:1.5px solid #5d3827; border-radius:48% 48% 43% 43% / 53% 53% 45% 45%; background:#f4e3bd; color:#5d3827; font-size:7px; line-height:.85; letter-spacing:.08em; box-shadow:0 2px 0 #5d382744; }
+.bread-box em { position:absolute; right:3px; bottom:2px; display:flex; gap:2px; }
+.bread-box em i { width:4px; height:4px; border-radius:50%; background:#6e422c; box-shadow:0 0 0 1px #e6bc7a; }
+.cell.crate.damage-1::after,.cell.crate.damage-2::after { content:""; position:absolute; right:-2px; top:13px; width:22px; height:20px; border-top:3px solid #673b28; border-left:2px solid #673b28; transform:rotate(-24deg) skew(-12deg); opacity:.72; }
+.cell.crate.damage-2 { filter:saturate(.72) brightness(.94); }
+.cell.crate.damage-2::after { left:4px; right:auto; top:6px; transform:rotate(30deg) skew(12deg); }
+
+.tray { flex-wrap:wrap; align-content:center; }
+.tray .marupan { width:37px; height:26px; }
+.tray .marupan.croissant { height:23px; }
+.tray .marupan.toast { height:30px; }
+.tray .marupan.pizza { width:29px; height:29px; }
+.tray .bread-eyes i { width:6px; height:7px; }
+.tray .bread-eyes i::after { left:1.8px; top:2.2px; width:2.2px; height:2.2px; }

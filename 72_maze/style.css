@@ -1,0 +1,30 @@
+:root{--paper:#f5f0e6;--ink:#24383a;--soft:#d8d1c4;--cream:#fffdf7;--accent:#e87567}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font-family:"Avenir Next","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+button{font:inherit;color:inherit;background:var(--cream);border:1.5px solid var(--ink);border-radius:999px;cursor:pointer;box-shadow:2px 2px 0 rgba(36,56,58,.18);touch-action:none}
+button:active{transform:translate(1px,1px);box-shadow:none}
+main{height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:12px;padding:max(14px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+header,footer{width:min(1120px,100%);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.eyebrow{margin:0 0 2px;font-size:11px;font-weight:800;letter-spacing:.22em;color:#778384}
+h1{margin:0;font-size:clamp(19px,3vw,30px);letter-spacing:.12em;line-height:1}
+.song-label{margin:5px 0 0;font-size:10px;font-weight:800;letter-spacing:.12em;color:#87908e}
+.actions{display:flex;gap:8px}.actions button{height:38px;padding:0 15px;font-size:12px;font-weight:800;letter-spacing:.08em}#sound{width:38px;padding:0;font-size:18px}
+#stage{position:relative;width:min(1120px,100%);height:100%;min-height:300px;margin:auto;overflow:hidden;border:1.5px solid #c8c0b3;border-radius:24px;background:#fcfaf4;box-shadow:0 12px 38px rgba(60,55,44,.08)}
+#sketch,#sketch canvas{display:block;width:100%!important;height:100%!important}
+.card{position:absolute;inset:0;z-index:4;display:grid;place-content:center;justify-items:center;gap:13px;text-align:center;background:rgba(245,240,230,.78);backdrop-filter:blur(6px)}
+.card[hidden]{display:none}.card p{margin:0;font-weight:800;font-size:clamp(18px,3.4vw,28px);letter-spacing:.05em}.card small{color:#657678}.card button{margin-top:5px;padding:10px 24px;font-weight:800}.melody{font-size:clamp(16px,3vw,24px);font-weight:800;letter-spacing:.08em;color:#53696b}
+.stage-select{padding:clamp(14px,3vw,30px);place-content:stretch;align-content:center;gap:16px;background:rgba(245,240,230,.96);overflow:auto}
+.select-heading{display:flex;align-items:baseline;justify-content:center;gap:12px}.select-heading p{font-size:clamp(18px,3vw,26px)}.select-heading small{font-weight:800;letter-spacing:.15em}
+.song-grid{width:min(860px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.song-card{position:relative;min-height:112px;padding:13px 14px!important;margin:0!important;border-radius:16px;text-align:left;overflow:hidden;background:#fffdf7;display:grid;grid-template-rows:auto auto 1fr;gap:3px}
+.song-card:hover{transform:translateY(-2px);box-shadow:3px 5px 0 rgba(36,56,58,.18)}.song-card .number{font-size:10px;letter-spacing:.15em;color:#8a928e}.song-card .title{font-weight:900;font-size:14px}.song-card .english{font-size:10px;color:#758281;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.song-card .preview{position:relative;height:36px;margin-top:5px}.song-card .preview svg{display:block;width:100%;height:100%;overflow:visible}.song-card .preview line{stroke-width:2;vector-effect:non-scaling-stroke;stroke-linecap:round}.song-card .preview circle{stroke:#fffdf7;stroke-width:.8;vector-effect:non-scaling-stroke}.song-card .cleared{position:absolute;right:9px;top:8px;color:#d9a72f;font-size:13px}
+#complete .complete-actions{display:flex;gap:7px}.complete-actions button{white-space:nowrap}
+#complete{inset:auto auto auto 16px;top:16px;width:min(330px,calc(100% - 32px));padding:15px 16px;transform:none;border:1.5px solid #bdb4a5;border-radius:18px;background:rgba(255,253,247,.94);box-shadow:0 8px 28px rgba(48,55,51,.13);backdrop-filter:blur(2px);gap:8px}
+#complete p{font-size:clamp(14px,2vw,18px)}#complete .melody{font-size:clamp(13px,2vw,17px)}#complete button{padding:7px 17px;margin-top:0;font-size:12px}
+footer{min-height:68px}#hint{margin:0;color:#69797a;font-size:13px;font-weight:700;letter-spacing:.05em}
+.pad{display:grid;grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,42px);gap:4px}.pad button{border-color:#9da8a6;background:rgba(255,253,247,.85);font-size:18px}.pad [data-dir=up]{grid-column:2}.pad [data-dir=left]{grid-column:1;grid-row:2}.pad [data-dir=down]{grid-column:2;grid-row:2}.pad [data-dir=right]{grid-column:3;grid-row:2}
+@media(pointer:fine) and (min-width:760px){.pad{opacity:.42}.pad:hover{opacity:1}}
+@media(max-height:620px){main{gap:7px;padding-top:8px;padding-bottom:7px}footer{min-height:54px}.pad{grid-template-columns:repeat(3,34px);grid-template-rows:repeat(2,28px)}.pad button{font-size:14px}#stage{min-height:230px}}
+@media(max-width:560px){main{padding-left:8px;padding-right:8px}#stage{border-radius:17px}#hint{max-width:42%;font-size:11px}.card small{font-size:12px}}
+@media(max-width:700px){.song-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.song-card{min-height:98px;padding:10px!important}.stage-select{justify-content:start}.song-label{display:none}}
+@media(max-height:620px){.song-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.song-card{min-height:78px}.song-card .preview{height:23px}.select-heading{display:none}}

@@ -1,0 +1,10 @@
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body, main { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body { background: #010208; overscroll-behavior: none; }
+main { position: relative; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; outline: none; }
+main:focus-visible { outline: 3px solid #b6d9f3; outline-offset: -6px; }
+canvas { display: block; width: 100%; height: 100%; }
+h1 { position: absolute; z-index: 1; left: 5%; right: 5%; bottom: max(7%, env(safe-area-inset-bottom)); margin: 0; color: #f7f5ec; font: 700 clamp(27px, 5vw, 55px)/1.35 "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif; letter-spacing: .09em; text-align: center; text-shadow: 0 2px 22px rgba(11, 24, 49, .7); pointer-events: none; transition: color 2s ease, text-shadow 2s ease; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 600px) { h1 { bottom: max(9%, env(safe-area-inset-bottom)); font-size: clamp(25px, 7vw, 38px); letter-spacing: .04em; } }

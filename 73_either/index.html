@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#e9e7df">
+  <meta name="description" content="100体の視線を受けながら、最後の一票を選ぶマーパンのインタラクティブ作品">
+  <title>MA-PAN 73 — EITHER</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header aria-label="投票結果">
+      <div class="count count-a"><span>A</span><strong id="score-a">50</strong></div>
+      <div class="mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="count count-b"><span>B</span><strong id="score-b">50</strong></div>
+    </header>
+
+    <section id="stage" aria-label="最後の投票">
+      <div id="sketch"></div>
+      <div id="choices" role="group" aria-label="AかBを選ぶ">
+        <button id="choose-a" type="button" aria-label="Aに投票する">A</button>
+        <button id="choose-b" type="button" aria-label="Bに投票する">B</button>
+      </div>
+      <button id="again" type="button" hidden>もう一度</button>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

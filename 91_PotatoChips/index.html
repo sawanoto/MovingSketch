@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4f0e6">
+  <meta name="description" content="袋を開けて、ポテトチップスを食べる音に触れるマーパン作品。">
+  <title>Ma-pan: Potato Chips</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header><span class="series">MA-PAN / 91</span><h1>POTATO CHIPS</h1><button id="reset" type="button">RESET</button></header>
+    <div class="meta"><span id="phase">01 / OPEN THE BAG</span><div class="sound" aria-label="サウンド設定"><span>SOUND</span><button id="normal" class="active" type="button" aria-pressed="true">NORMAL</button><span>/</span><button id="boost" type="button" aria-pressed="false">BOOST</button></div></div>
+    <section class="stage" aria-label="ポテトチップスを開けて食べる音のインタラクティブ作品"><canvas id="scene" aria-label="袋をクリックして開け、もう一度クリックしてチップスを食べる"></canvas><div class="guide" id="guide">袋をクリックして開ける <span>↓</span></div></section>
+    <footer><span>CLICK TO OPEN · CLICK TO CRUNCH</span><span>音を出すには袋に触れてください</span></footer>
+  </main>
+  <script src="sketch.js"></script>
+</body>
+</html>

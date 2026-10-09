@@ -64,3 +64,15 @@ test('marks are candidates only and block opening until removed', () => {
   board.mark(mine); assert.equal(board.open(mine),'mine');
 });
 
+test('all three selectable stages honor their board size and mine count', () => {
+  assert.deepEqual(MineStages.map(stage => [stage.size, stage.mineCount]), [[6, 6], [8, 12], [10, 18]]);
+  MineStages.forEach((stage, index) => {
+    const board = new MusicMineBoard(stage, random(index + 20), stage);
+    assert.equal(board.cells.length, stage.size ** 2);
+    assert.equal(board.mines.length, stage.mineCount);
+    board.open(board.mines[0]);
+    assert.equal(board.chain.filter(event => event.cell !== null).length, stage.mineCount);
+    assert.equal(board.chain.length, stage.melody.length);
+  });
+});
+
