@@ -8,11 +8,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main aria-label="8頭身マーパンの三つ目が視線を追いかける作品">
+  <main aria-label="スーツ姿のマーパンの頭と表情を比べる作品">
     <div id="canvas-wrap"></div>
-    <p class="hint">マウスを動かして、クリックしてみてください</p>
+    <section class="controls" aria-label="マーパンの表示設定">
+      <div class="control-group" aria-label="表情">
+        <span class="control-label">表情</span>
+        <button class="option-button is-active" type="button" data-expression="pupil" aria-pressed="true">通常</button>
+        <button class="option-button" type="button" data-expression="angry" aria-pressed="false">怒り</button>
+        <button class="option-button" type="button" data-expression="crying" aria-pressed="false">泣き</button>
+      </div>
+      <div class="control-group" aria-label="頭の大きさ">
+        <span class="control-label">頭の大きさ</span>
+        <button class="option-button is-active" type="button" data-size="small" aria-pressed="true">小</button>
+        <button class="option-button" type="button" data-size="medium" aria-pressed="false">中</button>
+        <button class="option-button" type="button" data-size="large" aria-pressed="false">大</button>
+      </div>
+    </section>
+    <p class="hint">頭を3回クリックすると紙吹雪！</p>
   </main>
   <script src="../51_gramophone/vendor/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
   <script src="sketch.js"></script>
 </body>
 </html>

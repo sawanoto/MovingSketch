@@ -1,0 +1,13 @@
+:root{--paper:#eeeadd;--ink:#26352e}
+*{box-sizing:border-box}
+html,body,main{width:100%;height:100%;margin:0;overflow:hidden;background:var(--paper)}
+body{font-family:"Avenir Next","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;user-select:none;-webkit-user-select:none;touch-action:none}
+main{position:relative}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.title{position:absolute;top:max(22px,env(safe-area-inset-top));left:clamp(22px,5vw,72px);pointer-events:none;color:var(--ink);display:flex;flex-direction:column;gap:5px;text-shadow:0 1px 8px #eeeadd}
+.title span{font-size:10px;letter-spacing:.25em;font-weight:700;opacity:.6}
+.title strong{font-size:clamp(20px,3vw,34px);font-weight:500;letter-spacing:.2em}
+.hint{position:absolute;bottom:max(24px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);pointer-events:none;color:#526a62;font-size:12px;letter-spacing:.12em;white-space:nowrap;text-shadow:0 1px 8px #eeeadd;transition:opacity 1s}
+.hint.hidden{opacity:0}
+#reset{position:absolute;right:clamp(20px,4vw,60px);bottom:max(20px,env(safe-area-inset-bottom));width:40px;height:40px;border:1px solid #7e9187;border-radius:50%;background:#eeeaddcc;color:#526a62;font:25px/1 system-ui;cursor:pointer}
+#reset:hover{color:var(--ink);border-color:var(--ink)}

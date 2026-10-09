@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#e9e7df">
+  <meta name="description" content="BLUE GROUPとRED GROUPによる静かな多数決を描く、マーパンのインタラクティブ作品。">
+  <title>MA-PAN 74 — BLUE or RED</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header><h1><span>BLUE</span> or <span>RED</span></h1></header>
+    <section id="stage" aria-label="BLUE GROUPとRED GROUPの投票">
+      <div id="sketch" aria-hidden="true"></div>
+      <div id="result-display">
+        <div class="tally" aria-live="polite">
+          <div><span>BLUE</span><strong id="blue-count">—</strong></div>
+          <div><span>RED</span><strong id="red-count">—</strong></div>
+        </div>
+        <div id="decision" aria-live="polite"></div>
+      </div>
+      <button id="vote-red" type="button" aria-label="REDに投票する">RED</button>
+      <button id="reset" type="button" hidden>RESET</button>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+  <script src="../shared/marpan-25d.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

@@ -1,12 +1,12 @@
 const TYPES = [
-  {type:'marpan',icon:'◉',label:'マーパン',material:'soft'},
-  {type:'board',icon:'▬',label:'板',material:'wood'},
-  {type:'bowl',icon:'◡',label:'お椀',material:'ceramic'},
-  {type:'cup',icon:'▯',label:'コップ',material:'glass'},
-  {type:'spoon',icon:'♩',label:'スプーン',material:'metal'},
-  {type:'metal',icon:'▰',label:'金属',material:'metal'},
-  {type:'stone',icon:'●',label:'石',material:'stone'},
-  {type:'bell',icon:'♢',label:'ベル',material:'bell'}
+  {type:'marpan',icon:'◉',label:{ja:'マーパン',en:'Ma-pan'},material:'soft'},
+  {type:'board',icon:'▬',label:{ja:'板',en:'Board'},material:'wood'},
+  {type:'bowl',icon:'◡',label:{ja:'お椀',en:'Bowl'},material:'ceramic'},
+  {type:'cup',icon:'▯',label:{ja:'コップ',en:'Cup'},material:'glass'},
+  {type:'spoon',icon:'♩',label:{ja:'スプーン',en:'Spoon'},material:'metal'},
+  {type:'metal',icon:'▰',label:{ja:'金属',en:'Metal'},material:'metal'},
+  {type:'stone',icon:'●',label:{ja:'石',en:'Stone'},material:'stone'},
+  {type:'bell',icon:'♢',label:{ja:'ベル',en:'Bell'},material:'bell'}
 ];
 const MATERIALS={
   metal:{wave:'sine',base:880,decay:.55,bright:1.7},bell:{wave:'sine',base:1046,decay:.9,bright:2.4},
@@ -16,6 +16,11 @@ const MATERIALS={
 const SCALE=[1,9/8,5/4,3/2,5/3,2,9/4,5/2,3];
 let objects=[],drops=[],sprays=[],ripples=[],flow=.38,selected=null,dragOffset,rotating=false,rotateMoved=false;
 let audioCtx,master,soundOn=true,lastSound=0,lastPointer={x:0,y:0},pointerSpeed=0;
+let language='ja';
+const UI_TEXT={
+  ja:{main:'蛇口の水で遊ぶサウンドトイ',tray:'水の下に置くもの',sound:'音を切り替える',switchLanguage:'Switch to English'},
+  en:{main:'A sound toy played with running water',tray:'Objects to place under the water',sound:'Toggle sound',switchLanguage:'日本語に切り替える'}
+};
 
 function setup(){
   const wrap=document.getElementById('canvas-wrap'),c=createCanvas(wrap.clientWidth,wrap.clientHeight);c.parent(wrap);
@@ -24,9 +29,18 @@ function setup(){
 function resetObjects(){objects=[]; spawn('marpan',width*.3,height*.68,-.08);spawn('board',width*.55,height*.57,.23);spawn('bowl',width*.72,height*.72,0)}
 function makeTray(){
   const tray=document.getElementById('tray');
-  TYPES.forEach(t=>{const b=document.createElement('button');b.className='item';b.innerHTML=`<div>${t.icon}<span>${t.label}</span></div>`;b.title=t.label;
+  TYPES.forEach(t=>{const b=document.createElement('button');b.className='item';b.dataset.type=t.type;b.innerHTML=`<div>${t.icon}<span>${t.label[language]}</span></div>`;b.title=t.label[language];
     b.addEventListener('pointerdown',e=>{e.preventDefault();initAudio();const r=document.querySelector('canvas').getBoundingClientRect();spawn(t.type,e.clientX-r.left,e.clientY-r.top-70,0,true);});tray.appendChild(b)});
   document.getElementById('sound').onclick=()=>{initAudio();soundOn=!soundOn;document.getElementById('sound').classList.toggle('off',!soundOn)};
+  document.getElementById('language').onclick=e=>{e.stopPropagation();setLanguage(language==='ja'?'en':'ja')};
+  setLanguage(language);
+}
+function setLanguage(next){
+  language=next;const en=language==='en',text=UI_TEXT[language],button=document.getElementById('language');
+  document.documentElement.lang=language;document.querySelector('main').setAttribute('aria-label',text.main);document.getElementById('tray').setAttribute('aria-label',text.tray);
+  const sound=document.getElementById('sound');sound.setAttribute('aria-label',text.sound);sound.title=text.sound;
+  button.textContent=en?'日本語':'EN';button.setAttribute('aria-label',text.switchLanguage);button.setAttribute('aria-pressed',String(en));
+  document.querySelectorAll('.item').forEach(item=>{const label=TYPES.find(t=>t.type===item.dataset.type).label[language];item.querySelector('span').textContent=label;item.title=label;});
 }
 function spawn(type,x,y,a=0,grab=false){
   const def=TYPES.find(t=>t.type===type),o={...def,x,y,a,w:type==='marpan'?118:type==='board'||type==='metal'?132:type==='spoon'?115:type==='bowl'?112:type==='cup'?74:type==='bell'?70:88,h:type==='marpan'?82:type==='board'||type==='metal'?22:type==='spoon'?30:type==='bowl'?58:type==='cup'?88:type==='bell'?73:61,hitAt:0};

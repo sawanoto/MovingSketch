@@ -51,6 +51,27 @@ const designs = [
   }
 ];
 
+const englishDesigns = [
+  { name:"Bamboo Leaf Boat", copy:"A small, humble boat folded like a bamboo leaf. It drifts gently on the current of sound and suggests a journey rather than a race.", ride:"Sit in the shallow hollow with the upper body exposed", sound:"A soft, staff-like trail flows from the stern", visibility:"The long green silhouette and white Ma-pan read as one form" },
+  { name:"Droplet Boat", copy:"A water droplet laid on its side. The sound waves naturally give this quiet vehicle its direction.", ride:"Nestle inside the round central hollow", sound:"Tiny sound particles linger like droplets", visibility:"A single-line silhouette stays clear at small sizes" },
+  { name:"Humming Pod", copy:"A capsule shaped like a bean pod. More than a vehicle, it is a resonator that carries voices into the distance.", ride:"Perch on its soft rim", sound:"The whole hull expands and contracts as if breathing", visibility:"Its rounded mass is easy to track in a busy scene" },
+  { name:"Rhythm Ring", copy:"A rideable floating ring. With no clear top, bottom, front, or back, it is the most neutral and abstract design.", ride:"Show the face and upper body through the center", sound:"Concentric circles spread with the beat", visibility:"The open center forms a readable symbol from afar" },
+  { name:"Sun-Dappled Leaf", copy:"A symmetrical vessel shaped like a leaf bowl. It emphasizes being carried by sound rather than speed.", ride:"Sit neatly in the center of the leaf", sound:"The veins glow faintly with the musical scale", visibility:"Rounded tips suggest direction without aggression" },
+  { name:"Sound Bob", copy:"A rigid transport form built for Ma-pan and based on a bobsled. Its symmetrical body, panel lines, and cockpit are clearly defined.", ride:"The three-eyed Ma-pan fits into the low cockpit", sound:"Three luminous sound waves flow from the rear slots", visibility:"Teal hull, navy cockpit, and white face create three clear layers" },
+  { name:"2.5D Sound Sled", copy:"A game-ready 2.5D interpretation of the reference model, combining a rounded nose with a rigid outer shell.", ride:"A dedicated craft with Ma-pan's three eyes integrated into the nose", sound:"Thin bands of light trail between the rear fins", visibility:"Cyan, white, and black layers plus large eyes remain clear when small" },
+  { name:"Top-View Sled", copy:"A top-down game design of the same craft as 07, prioritizing perfect symmetry and a clear forward direction.", ride:"Ma-pan sits inside the hull with only the three eyes visible ahead", sound:"Sound lines flow between the two rear fins", visibility:"The round nose and triangular eye layout clearly show direction" },
+  { name:"Squid Ma-pan", copy:"A squid-like Ma-pan that swims through a sea of sound, based on the sketch's round body and forked silhouette.", ride:"Glide using the body and two tentacles instead of a vehicle", sound:"Bubble-like sound particles stream between the tentacles", visibility:"Three large eyes, a round body, and two tentacles remain distinct when small" },
+  { name:"Hard-Shell Squid", copy:"A rigid, top-down squid form based on ChatGPTIMGsquidTop.png. Its symmetrical body travels upward from the bottom of the screen.", ride:"The three-eyed Ma-pan itself becomes a rigid transport form", sound:"A sound wake trails downward between the two rear runners", visibility:"A rounded upward nose, three aligned eyes, and long symmetrical legs identify it" }
+];
+
+const UI_TEXT = {
+  ja: { title:"音に乗るかたち", intro:"敵でも味方でもない。音の流れを、すーっと移動するための船。", selector:"乗り物のデザイン案", ride:"乗り方", sound:"音の表現", visibility:"視認性", guide:"← → でデザイン切替", back:"作品一覧へ戻る", switchLanguage:"Switch to English" },
+  en: { title:"FORMS THAT RIDE SOUND", intro:"Neither friend nor foe—a vessel made to glide through the flow of sound.", selector:"Vehicle design concepts", ride:"RIDE", sound:"SOUND", visibility:"VISIBILITY", guide:"← →  SWITCH DESIGN", back:"Back to gallery", switchLanguage:"日本語に切り替える" }
+};
+
+let language = "ja";
+try { language = localStorage.getItem("marpan-vehicle-language") === "en" ? "en" : "ja"; } catch (_) {}
+
 let selected = 0;
 let vehicle = { x: 0, y: 0, tx: 0, ty: 0, vx: 0, vy: 0 };
 let trails = [];
@@ -63,10 +84,9 @@ function setup() {
   pixelDensity(1);
   strokeCap(ROUND);
   strokeJoin(ROUND);
-  vehicle.x = vehicle.tx = width * 0.43;
-  vehicle.y = vehicle.ty = height * 0.55;
+  centerVehicle();
   buildSelector();
-  updateDetails();
+  updateLanguage();
 }
 
 function draw() {
@@ -100,12 +120,7 @@ function drawWorld() {
 }
 
 function updateVehicle() {
-  const oldX = vehicle.x;
-  const oldY = vehicle.y;
-  vehicle.x = lerp(vehicle.x, vehicle.tx, 0.065);
-  vehicle.y = lerp(vehicle.y, vehicle.ty, 0.065);
-  vehicle.vx = lerp(vehicle.vx, vehicle.x - oldX, 0.3);
-  vehicle.vy = lerp(vehicle.vy, vehicle.y - oldY, 0.3);
+  centerVehicle();
   if (designs[selected].type !== "squidTop" && frameCount % 3 === 0) {
     trails.push({ x: vehicle.x - 88, y: vehicle.y + 25, life: 1, color: designs[selected].color });
   }
@@ -637,7 +652,7 @@ function selectDesign(index) {
 }
 
 function updateDetails() {
-  const d=designs[selected]; buttons.forEach((b,i)=>b.classList.toggle("active",i===selected));
+  const d=language==="en"?{...designs[selected],...englishDesigns[selected]}:designs[selected]; buttons.forEach((b,i)=>b.classList.toggle("active",i===selected));
   document.getElementById("designNumber").textContent=String(selected+1).padStart(2,"0");
   document.getElementById("designName").textContent=d.name;
   document.getElementById("recommendation").hidden=!d.recommended;
@@ -647,10 +662,23 @@ function updateDetails() {
   document.getElementById("visibilityCopy").textContent=d.visibility;
 }
 
-function setTarget(x,y){ vehicle.tx=constrain(x,90,width-90); vehicle.ty=constrain(y,height*.28,height*.76); }
-function mouseMoved(){ setTarget(mouseX,mouseY); }
-function mouseDragged(){ setTarget(mouseX,mouseY); return false; }
-function touchMoved(){ setTarget(mouseX,mouseY); return false; }
-function mousePressed(){ if(mouseY<height-85) setTarget(mouseX,mouseY); }
+function centerVehicle(){ vehicle.x=vehicle.tx=width*.5; vehicle.y=vehicle.ty=height*.5; vehicle.vx=vehicle.vy=0; }
+function updateLanguage(){
+  const text=UI_TEXT[language];
+  document.documentElement.lang=language;
+  document.getElementById("pageTitle").textContent=text.title;
+  document.getElementById("pageIntro").textContent=text.intro;
+  document.getElementById("selector").setAttribute("aria-label",text.selector);
+  document.getElementById("rideLabel").textContent=text.ride;
+  document.getElementById("soundLabel").textContent=text.sound;
+  document.getElementById("visibilityLabel").textContent=text.visibility;
+  document.getElementById("guide").textContent=text.guide;
+  document.querySelector(".back").setAttribute("aria-label",text.back);
+  const button=document.getElementById("languageButton");
+  button.textContent=language==="ja"?"EN":"日本語";
+  button.setAttribute("aria-label",text.switchLanguage);
+  updateDetails();
+}
+document.getElementById("languageButton").addEventListener("click",()=>{ language=language==="ja"?"en":"ja"; try{localStorage.setItem("marpan-vehicle-language",language)}catch(_){} updateLanguage(); });
 function keyPressed(){ if(keyCode===RIGHT_ARROW) selectDesign(selected+1); if(keyCode===LEFT_ARROW) selectDesign(selected-1); }
-function windowResized(){ resizeCanvas(windowWidth,windowHeight); setTarget(vehicle.tx,vehicle.ty); }
+function windowResized(){ resizeCanvas(windowWidth,windowHeight); centerVehicle(); }

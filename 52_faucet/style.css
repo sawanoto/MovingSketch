@@ -8,4 +8,6 @@ canvas{display:block;width:100%!important;height:100%!important}
 .item:active{transform:translateY(2px);box-shadow:none}.item span{font-size:9px;font-weight:800;display:block;margin-top:-6px}
 .sound{position:fixed;z-index:6;right:14px;top:14px;width:42px;height:42px;border:2px solid rgba(37,51,56,.25);border-radius:50%;background:rgba(255,255,255,.78);color:var(--ink);font:bold 20px system-ui;cursor:pointer}
 .sound.off{opacity:.42;text-decoration:line-through}
+.language{position:fixed;z-index:6;right:64px;top:14px;height:42px;min-width:48px;padding:0 12px;border:2px solid rgba(37,51,56,.25);border-radius:21px;background:rgba(255,255,255,.78);color:var(--ink);font:800 13px system-ui;cursor:pointer}
+.language:focus-visible,.sound:focus-visible,.item:focus-visible{outline:3px solid rgba(42,141,165,.55);outline-offset:2px}
 @media(max-height:560px){.tray{padding:5px;gap:4px}.item{width:43px;height:43px;font-size:21px;border-radius:12px}.item span{display:none}}

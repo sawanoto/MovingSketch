@@ -11,16 +11,17 @@
 <body>
   <main id="game">
     <header class="topbar">
-      <div><p class="eyebrow">MAAPAN STORIES / 40</p><h1>マーパン観察記</h1></div>
+      <div><p class="eyebrow">MAAPAN STORIES / 40</p><h1 id="siteTitle">マーパン観察記</h1></div>
       <div class="clock"><span id="dayLabel">第1日</span><strong id="timeLabel">朝 06:00</strong></div>
-      <div class="speed" aria-label="再生速度">
-        <button data-speed="1" class="active">×1</button><button data-speed="2">×2</button><button data-speed="4">×4</button><button data-speed="0">停止</button>
+      <div class="header-actions"><button class="language-toggle" id="languageToggle" type="button" aria-label="Switch to English" aria-pressed="false">EN</button><div class="speed" aria-label="再生速度">
+        <button data-speed="1" class="active">×1</button><button data-speed="2">×2</button><button data-speed="4">×4</button><button data-speed="0" id="pauseButton">停止</button>
+      </div>
       </div>
     </header>
 
     <section class="world" aria-label="マーパンたちの暮らす草地">
       <div id="canvas-wrap"></div>
-      <p class="hint">マーパンを選ぶと、頭の中をのぞけます</p>
+      <p class="hint" id="hintText">マーパンを選ぶと、頭の中をのぞけます</p>
       <section class="seed-picker" id="seedPicker" aria-labelledby="seedQuestion">
         <p class="seed-day" id="seedDay">第1日</p>
         <h2 id="seedQuestion">今日は世界に何を起こしますか？</h2>
@@ -28,7 +29,7 @@
         <p class="seed-description" id="seedDescription">選ばなくても「何もしない」で自動的に始まります。</p>
         <button class="watch-day" id="watchDay" disabled>この一日を見る</button>
       </section>
-      <div class="day-progress" id="dayProgress" aria-hidden="true"><i></i><span>マーパンたちが答えを出しています</span></div>
+      <div class="day-progress" id="dayProgress" aria-hidden="true"><i></i><span id="progressText">マーパンたちが答えを出しています</span></div>
     </section>
 
     <aside class="sidepanel">

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f1e8">
+  <meta name="description" content="割れる、滴る、伸びる、あふれる。4つの食品の動きを触って確かめるマーパンの視覚実験。">
+  <title>Ma-pan: Food Porn</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header><span class="series">MA-PAN / 90</span><h1>FOOD PORN</h1><button id="reset" type="button">RESET</button></header>
+    <section class="grid" aria-label="4つの食品のインタラクティブ作品">
+      <article class="card"><div class="name"><span>01</span><h2>EGG</h2><small>BREAK / FLOW</small></div><canvas id="egg" aria-label="卵黄を押して割る"></canvas></article>
+      <article class="card"><div class="name"><span>02</span><h2>SAUSAGE</h2><small>CUT / JUICE</small></div><canvas id="sausage" aria-label="ウインナーを横にスワイプして切る"></canvas></article>
+      <article class="card"><div class="name"><span>03</span><h2>CHEESE</h2><small>STRETCH / DRIP</small></div><canvas id="cheese" aria-label="チーズを上にドラッグして伸ばす"></canvas></article>
+      <article class="card"><div class="name"><span>04</span><h2>MILK</h2><small>POUR / OVERFLOW</small></div><canvas id="milk" aria-label="牛乳容器を押し続けて注ぐ"></canvas></article>
+    </section>
+  </main>
+  <script src="sketch.js"></script>
+</body>
+</html>

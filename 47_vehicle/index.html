@@ -12,22 +12,23 @@
 <body>
   <main>
     <a class="back" href="../" aria-label="作品一覧へ戻る">←</a>
+    <button class="language-button" id="languageButton" type="button" aria-label="Switch to English">EN</button>
     <header>
       <p class="eyebrow">47 / VEHICLE STUDY</p>
-      <h1>音に乗るかたち</h1>
-      <p>敵でも味方でもない。音の流れを、すーっと移動するための船。</p>
+      <h1 id="pageTitle">音に乗るかたち</h1>
+      <p id="pageIntro">敵でも味方でもない。音の流れを、すーっと移動するための船。</p>
     </header>
     <section class="selector" id="selector" aria-label="乗り物のデザイン案"></section>
     <aside class="details" aria-live="polite">
       <div><span id="designNumber">01</span><strong id="designName"></strong><em id="recommendation">RECOMMENDED</em></div>
       <p id="designCopy"></p>
       <dl>
-        <div><dt>乗り方</dt><dd id="rideCopy"></dd></div>
-        <div><dt>音の表現</dt><dd id="soundCopy"></dd></div>
-        <div><dt>視認性</dt><dd id="visibilityCopy"></dd></div>
+        <div><dt id="rideLabel">乗り方</dt><dd id="rideCopy"></dd></div>
+        <div><dt id="soundLabel">音の表現</dt><dd id="soundCopy"></dd></div>
+        <div><dt id="visibilityLabel">視認性</dt><dd id="visibilityCopy"></dd></div>
       </dl>
     </aside>
-    <p class="guide">マウス・指で移動　／　← → でデザイン切替</p>
+    <p class="guide" id="guide">← → でデザイン切替</p>
   </main>
   <script src="sketch.js"></script>
 </body>
