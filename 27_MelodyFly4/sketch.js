@@ -18,16 +18,7 @@ const noteEnglish = {
   "ド": "C", "レ": "D", "ミ": "E", "ファ": "F",
   "ソ": "G", "ラ": "A", "シ": "B", "高いド": "High C"
 };
-const noteColors = {
-  "ド": "#ef6a67",
-  "レ": "#f29b52",
-  "ミ": "#e5c64f",
-  "ファ": "#63b875",
-  "ソ": "#4da9c9",
-  "ラ": "#6f86d6",
-  "シ": "#9a72c7",
-  "高いド": "#e65f91"
-};
+const noteColors = MARPAN_NOTE_COLORS;
 
 // ゲームバランス設定
 let gravity = 0.42;

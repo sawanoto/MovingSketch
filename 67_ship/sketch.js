@@ -7,6 +7,33 @@ const SHIPS={
   cargo:{label:"貨物船",note:"大きな船倉へ、重さを低く均等に",capacity:105,baseDraft:.45,draftRange:.29,stability:.9,length:.82,depth:.9,color:"#b64f3f",deck:"#e1d3b6",super:"cargo"},
   container:{label:"コンテナ船",note:"巨大な排水量が、大量の積荷を支える",capacity:180,baseDraft:.43,draftRange:.28,stability:.94,length:.94,depth:1,color:"#2e6672",deck:"#d8d2bd",super:"container"}
 };
+const EN_SHIPS={
+  dugout:{label:"Dugout Canoe",note:"A light, narrow hull stays afloat"},
+  sail:{label:"Wooden Sailboat",note:"A rounded hull displaces more water"},
+  steam:{label:"Steamship",note:"Buoyancy supports the broad hull and engine"},
+  cargo:{label:"Cargo Ship",note:"Keep heavy loads low and evenly spread"},
+  container:{label:"Container Ship",note:"A huge displacement supports a large cargo load"}
+};
+const UI={
+  ja:{description:"マーパンを船へ積み、船体の形・浮力・積載量・重量配分を体験するインタラクティブ作品",picker:"船を選ぶ",sketch:"船の浮力実験",load:"積載重量",draft:"喫水",stability:"安定性",hint:"マーパンをつかんで、船の好きな場所へ",reset:"空荷の喫水へ戻りました",switched:"同じ荷物でも、沈み方が変わります",sinking:"積載限界を超えました — 浸水が始まります",stable:"安定",flooding:"浸水中",uneven:"偏りあり",nearLimit:"限界に近い",balance:"重量バランス",bow:"船首",port:"左舷",starboard:"右舷"},
+  en:{description:"Load Ma-pan onto ships and explore hull shapes, buoyancy, cargo capacity, and weight distribution",picker:"Choose a ship",sketch:"Ship buoyancy experiment",load:"Cargo load",draft:"Draft",stability:"Stability",hint:"Drag Ma-pan onto any part of the ship",reset:"Returned to the empty-load draft",switched:"The same load makes each ship sit differently",sinking:"Cargo limit exceeded — flooding has begun",stable:"Stable",flooding:"Flooding",uneven:"Uneven load",nearLimit:"Near limit",balance:"WEIGHT BALANCE",bow:"Bow",port:"Port",starboard:"Starboard"}
+};
+let language="ja";
+function uiText(){return UI[language]}
+function shipText(key){return language==="en"?EN_SHIPS[key]:SHIPS[key]}
+function setLanguage(next){
+  language=next;document.documentElement.lang=next;
+  document.querySelector('meta[name="description"]').content=uiText().description;
+  const toggle=document.getElementById("language-toggle");toggle.textContent=next==="ja"?"EN":"JA";toggle.setAttribute("aria-label",next==="ja"?"Switch to English":"日本語に切り替え");
+  document.getElementById("ship-picker").setAttribute("aria-label",uiText().picker);
+  document.getElementById("sketch").setAttribute("aria-label",uiText().sketch);
+  document.querySelectorAll(".ship-btn").forEach((button,i)=>button.textContent=shipText(Object.keys(SHIPS)[i]).label);
+  document.getElementById("ship-note").textContent=shipKey==="dugout"&&next==="ja"?"水を押しのけて、浮かぶ":shipText(shipKey).note;
+  for(const key of ["load","draft","stability"])document.getElementById(key+"-label").textContent=uiText()[key];
+  document.getElementById("hint").textContent=uiText().hint;
+  document.getElementById("message").classList.remove("show");
+  recalculate();
+}
 const SIZES=[
   {key:"small",label:"1 t",w:30,h:23,weight:1,color:"#fffef7"},
   {key:"medium",label:"3 t",w:43,h:31,weight:3,color:"#fff8e9"},
@@ -21,7 +48,7 @@ function setup(){
   const c=createCanvas(windowWidth,windowHeight);c.parent("sketch");pixelDensity(min(devicePixelRatio||1,2));
   const picker=document.getElementById("ship-picker");
   Object.entries(SHIPS).forEach(([key,s])=>{const b=document.createElement("button");b.className="ship-btn"+(key===shipKey?" active":"");b.textContent=s.label;b.onclick=()=>switchShip(key);picker.appendChild(b)});
-  document.getElementById("reset").onclick=resetAll;layout();makeTray();recalculate();
+  document.getElementById("reset").onclick=resetAll;document.getElementById("language-toggle").onclick=()=>setLanguage(language==="ja"?"en":"ja");layout();makeTray();recalculate();
 }
 function layout(){
   const s=SHIPS[shipKey],len=min(width*.82,980)*s.length,depth=min(150,height*.22)*s.depth;
@@ -29,16 +56,16 @@ function layout(){
 }
 function makeBun(size,x,y,tray=true){const s=SIZES.find(q=>q.key===size)||SIZES[1];return{id:nextId++,s,size:s.key,actor:new Marpan25D({maxSize:s.w,bodyColor:s.color,autoBlink:true}),x,y,homeX:x,homeY:y,tray,onShip:!tray,side:0,vx:0,vy:0,rot:0,falling:false}}
 function makeTray(){buns=[];const keys=["small","medium","large","heavy","super"],span=min(width*.58,610),start=width*.53-span/2,gap=span/(keys.length-1),y=height-max(47,height*.063);keys.forEach((k,i)=>{const s=SIZES.find(q=>q.key===k);buns.push(makeBun(k,start+i*gap,y-s.h*.5,true))})}
-function resetAll(){sinking=false;flood=sink=impact=0;draft=targetDraft=trim=targetTrim=roll=targetRoll=0;makeTray();recalculate();setMessage("空荷の喫水へ戻りました",1000)}
-function switchShip(key){if(key===shipKey)return;shipKey=key;document.querySelectorAll(".ship-btn").forEach((b,i)=>b.classList.toggle("active",Object.keys(SHIPS)[i]===key));document.getElementById("ship-note").textContent=SHIPS[key].note;sinking=false;flood=sink=impact=0;draft=targetDraft=trim=targetTrim=roll=targetRoll=0;layout();makeTray();recalculate();setMessage("同じ荷物でも、沈み方が変わります",1500)}
+function resetAll(){sinking=false;flood=sink=impact=0;draft=targetDraft=trim=targetTrim=roll=targetRoll=0;makeTray();recalculate();setMessage(uiText().reset,1000)}
+function switchShip(key){if(key===shipKey)return;shipKey=key;document.querySelectorAll(".ship-btn").forEach((b,i)=>b.classList.toggle("active",Object.keys(SHIPS)[i]===key));document.getElementById("ship-note").textContent=shipText(key).note;sinking=false;flood=sink=impact=0;draft=targetDraft=trim=targetTrim=roll=targetRoll=0;layout();makeTray();recalculate();setMessage(uiText().switched,1500)}
 function recalculate(){
   const s=SHIPS[shipKey],cargo=buns.filter(b=>b.onShip&&!b.falling),load=cargo.reduce((n,b)=>n+b.s.weight,0);
   const ratio=load/s.capacity;let fore=0,side=0;cargo.forEach(b=>{const nx=(b.x-ship.cx)/(ship.len*.5);fore+=b.s.weight*nx;side+=b.s.weight*b.side});
   targetDraft=ratio*s.draftRange;targetTrim=load?constrain(fore/s.capacity*14,-11,11):0;targetRoll=load?constrain(side/s.capacity*18/s.stability,-14,14):0;
-  if(!sinking&&ratio>1.04){sinking=true;setMessage("積載限界を超えました — 浸水が始まります",2500);sound("alarm")}
+  if(!sinking&&ratio>1.04){sinking=true;setMessage(uiText().sinking,2500);sound("alarm")}
   updateReadout(load,ratio);
 }
-function updateReadout(load,ratio){const s=SHIPS[shipKey];document.getElementById("load-value").textContent=`${load} / ${s.capacity} t`;document.getElementById("draft-value").textContent=(.5+(s.baseDraft+targetDraft)*s.depth*2.7).toFixed(1)+" m";let state="安定";if(sinking)state="浸水中";else if(abs(targetTrim)>7||abs(targetRoll)>8)state="偏りあり";else if(ratio>.82)state="限界に近い";document.getElementById("stability-value").textContent=state}
+function updateReadout(load,ratio){const s=SHIPS[shipKey];document.getElementById("load-value").textContent=`${load} / ${s.capacity} t`;document.getElementById("draft-value").textContent=(.5+(s.baseDraft+targetDraft)*s.depth*2.7).toFixed(1)+" m";let state=uiText().stable;if(sinking)state=uiText().flooding;else if(abs(targetTrim)>7||abs(targetRoll)>8)state=uiText().uneven;else if(ratio>.82)state=uiText().nearLimit;document.getElementById("stability-value").textContent=state}
 function updateWorld(){
   const dt=min(.035,deltaTime/1000);draft=lerp(draft,targetDraft,min(1,dt*2.4));trim=lerp(trim,targetTrim,min(1,dt*2.2));roll=lerp(roll,targetRoll,min(1,dt*2.5));impact*=pow(.025,dt);
   if(sinking){flood=min(1,flood+dt*.12);if(flood>.22)targetRoll+=sin(millis()*.0011)*dt*5;if(flood>.46)sink+=dt*(7+flood*19);if(flood>.78)targetTrim=lerp(targetTrim,targetTrim>=0?18:-18,dt*.3)}
@@ -64,7 +91,7 @@ function drawWaterOverlay(){noStroke();fill(64,139,157,205);beginShape();vertex(
 function cargoScreenPos(b){const a=radians(trim+roll*.34),lx=b.x-ship.cx,base=hullPoseY()-b.s.h*.5-9-abs(b.side)*5;return{x:ship.cx+lx*cos(a),y:base+lx*sin(a)}}
 function drawBuns(){buns.filter(b=>b!==dragging).forEach(drawBun);if(dragging)drawBun(dragging)}
 function drawBun(b){let x=b.x,y=b.y;if(b.onShip&&!b.falling&&b!==dragging){const p=cargoScreenPos(b);x=p.x;y=p.y}const bob=b.tray?sin(millis()*.002+b.id)*1.2:0;push();translate(x,y+bob);rotate(b.rot);b.actor.lookAt(mouseX,mouseY);b.actor.drawAt(0,0,{bodyWidth:b.s.w,bodyHeight:b.s.h,bodyColor:b.s.color,scaleX:b===dragging?1.05:1,scaleY:b===dragging?.94:1});pop()}
-function drawTopView(){const x=width-105,y=height-78;if(width<520||height<520)return;push();translate(x,y);noStroke();fill(248,251,244,190);rect(-75,-47,150,94,13);fill(75,103,107,130);textAlign(CENTER);textSize(9);text("重量バランス",0,-32);stroke(75,103,107,75);line(-53,3,53,3);line(0,-20,0,26);noFill();strokeWeight(2);ellipse(0,3,96,33);const cargo=buns.filter(b=>b.onShip);cargo.forEach(b=>{fill("#e06e4f");noStroke();circle(constrain((b.x-ship.cx)/(ship.len*.5)*42,-42,42),3+b.side*11,3+b.s.weight*.65)});noStroke();fill(75,103,107,100);textSize(8);text("船首",57,6);text("左舷",0,-20);text("右舷",0,34);pop()}
+function drawTopView(){const x=width-105,y=height-78;if(width<520||height<520)return;push();translate(x,y);noStroke();fill(248,251,244,190);rect(-75,-47,150,94,13);fill(75,103,107,130);textAlign(CENTER);textSize(9);text(uiText().balance,0,-32);stroke(75,103,107,75);line(-53,3,53,3);line(0,-20,0,26);noFill();strokeWeight(2);ellipse(0,3,96,33);const cargo=buns.filter(b=>b.onShip);cargo.forEach(b=>{fill("#e06e4f");noStroke();circle(constrain((b.x-ship.cx)/(ship.len*.5)*42,-42,42),3+b.side*11,3+b.s.weight*.65)});noStroke();fill(75,103,107,100);textSize(8);text(uiText().bow,57,6);text(uiText().port,0,-20);text(uiText().starboard,0,34);pop()}
 function drawTrayLabels(){noStroke();fill(55,77,79,135);textAlign(CENTER,CENTER);textSize(9);buns.filter(b=>b.tray&&!b.falling).forEach(b=>text(b.s.label,b.x,height-14))}
 function pick(x,y){return buns.slice().reverse().find(b=>{const p=b.onShip?cargoScreenPos(b):b;return !b.falling&&abs(x-p.x)<b.s.w*.68&&abs(y-p.y)<b.s.h*.75})}
 function mousePressed(){unlockAudio();const b=pick(mouseX,mouseY);if(!b)return false;const p=b.onShip?cargoScreenPos(b):b;dragging=b;dragDX=mouseX-p.x;dragDY=mouseY-p.y;if(b.tray){const replacement=makeBun(b.size,b.homeX,b.homeY,true);buns.unshift(replacement)}b.onShip=false;b.tray=false;recalculate();document.querySelector("canvas").classList.add("dragging");return false}

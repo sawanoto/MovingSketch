@@ -12,14 +12,14 @@
   <main>
     <header>
       <div class="brand"><h1>MA-PAN SHIP LAB</h1><p id="ship-note">水を押しのけて、浮かぶ</p></div>
-      <button id="reset" type="button">RESET</button>
+      <div class="header-actions"><button id="language-toggle" type="button" aria-label="Switch to English">EN</button><button id="reset" type="button">RESET</button></div>
     </header>
     <nav id="ship-picker" aria-label="船を選ぶ"></nav>
     <div id="sketch" aria-label="船の浮力実験"></div>
     <aside id="readout" aria-live="polite">
-      <div><span>積載重量</span><b id="load-value">0 / 12</b></div>
-      <div><span>喫水</span><b id="draft-value">0.5 m</b></div>
-      <div><span>安定性</span><b id="stability-value">安定</b></div>
+      <div><span id="load-label">積載重量</span><b id="load-value">0 / 12</b></div>
+      <div><span id="draft-label">喫水</span><b id="draft-value">0.5 m</b></div>
+      <div><span id="stability-label">安定性</span><b id="stability-value">安定</b></div>
     </aside>
     <p id="hint">マーパンをつかんで、船の好きな場所へ</p>
     <p id="message" aria-live="polite"></p>

@@ -1,5 +1,10 @@
 .DS_Store
 Thumbs.db
+/.tmp-*/
+/.tmp-*.png
+/**/.edge-test*/
+*.tsbuildinfo
+/レコーディング *.mp4
 *.log
 .codex-server.*.log
 37_IceCrash/prompt.txt

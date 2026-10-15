@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
   <meta name="theme-color" content="#f3efe4">
-  <meta name="description" content="日本語の文字がつながり、ひとつの生きた紋様になるインタラクティブ・カリグラフィー作品。">
-  <title>文字は、ひとつになる。</title>
+  <meta name="description" content="日本語の文字がつながり、ひとつの生きた紋様になるインタラクティブなカリグラフィー作品。 Interactive Japanese calligraphy.">
+  <title>文字は、ひとつになる。 / Letters Become One</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,32 +13,24 @@
     <header>
       <div class="title-block">
         <p class="series">MA-PAN STUDY 68</p>
-        <h1>文字は、ひとつになる。</h1>
+        <h1>文字は、ひとつになる。 <span class="en-title">Letters Become One</span></h1>
       </div>
-      <button id="sound" class="icon-button" type="button" aria-label="音を切り替える" aria-pressed="true">音　あり</button>
+      <button id="sound" class="icon-button" type="button" aria-label="音を切り替える / Toggle sound" aria-pressed="true">音 あり / Sound on</button>
     </header>
-
-    <nav class="modes" aria-label="構図を選ぶ">
-      <button class="mode active" data-mode="circle">円形</button>
-      <button class="mode" data-mode="vertical">縦長</button>
-      <button class="mode" data-mode="symmetry">左右対称</button>
-      <button class="mode" data-mode="free">自由形</button>
+    <nav class="modes" aria-label="構図を選ぶ / Choose a composition">
+      <button class="mode active" data-mode="circle">円形 <small>Circle</small></button>
+      <button class="mode" data-mode="vertical">縦長 <small>Vertical</small></button>
+      <button class="mode" data-mode="symmetry">左右対称 <small>Symmetry</small></button>
+      <button class="mode" data-mode="free">自由形 <small>Freeform</small></button>
     </nav>
-
-    <section id="stage" aria-label="日本語カリグラフィー。文字を押すと線がつながります">
+    <section id="stage" aria-label="日本語カリグラフィー。触れると線がつながります。 / Touch to connect the calligraphy strokes.">
       <canvas id="art"></canvas>
-      <div id="instruction">
-        <span class="finger">◯</span>
-        <span>一度触れて、形をひらく</span>
-      </div>
+      <div id="instruction"><span class="finger"></span><span>一度触れて、形をひらく <small>Touch to reveal</small></span></div>
     </section>
-
     <footer>
-      <div class="progress-wrap" aria-label="作品の完成度">
-        <div id="progress"></div>
-      </div>
-      <p id="reading" aria-live="polite">い　き　る　し　ず　け　さ</p>
-      <button id="reset" type="button">ほどく</button>
+      <div class="progress-wrap" aria-label="作品の完成度 / Progress"><div id="progress"></div></div>
+      <p id="reading" aria-live="polite">い　ろ　は　に　ほ　へ　と</p>
+      <button id="reset" type="button">ほどく <small>Reset</small></button>
     </footer>
   </main>
   <script src="sketch.js"></script>
