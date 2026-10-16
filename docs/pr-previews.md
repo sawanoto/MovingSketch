@@ -31,12 +31,16 @@ GitHubのscheduleは即時実行の保証がなく、混雑時は遅延や実行
 
 PR更新イベントから別リポジトリへ直接dispatchするには通常は追加のGitHub App/PAT等が必要です。現在は秘密情報の追加管理を避け、既存の定期確認と手動更新を使います。イベント直後の配信が必要になった場合は、Cloudflare Pages/NetlifyのGit連携が代替ですが、外部アカウント・リポジトリ接続の設定が必要です。
 
+## 導入時点のMovingSketch配信状態
+
+2026-10-16の確認時、`MovingSketch-preview` の `Refresh PR previews` は `disabled_manually`（手動停止）でした。URL通知と代替artifactは動作しますが、配信は専用Actionsの[ワークフロー画面](https://github.com/sawanoto/MovingSketch-preview/actions/workflows/previews.yml)でEnable workflowを実行し、Run workflowを起動するまで更新されません。本番のPagesや作品PRをマージする必要はありません。
+
 ## 開けないとき
 
 |状態|理由の調べ方・対応|
 |---|---|
 |404・古い作品|preview-info.jsonのSHAを比較。専用Actionsの直近実行・キュー・失敗ログを確認し、Run workflowを実行。ブラウザーも再読み込み|
-|定期更新が来ない|scheduleの遅延や無活動停止。Actionsで再有効化または手動実行|
+|定期更新が来ない|scheduleの遅延や停止。`disabled_manually` は手動停止、`disabled_inactivity` は無活動停止。専用ActionsのEnable workflowで有効化してからRun workflow。readinessジョブも状態を診断してPRへ表示|
 |Pages配信ジョブが失敗|専用リポジトリのSettings → Pages → SourceがGitHub Actionsか、github-pages環境の承認待ち・main許可・Pages/Actions権限・サイズ超過を確認。本番リポジトリのPages設定は変更しない|
 |PRコメントがない|作品側のPR previewのlinkジョブを確認。pull-requests:writeが管理ポリシーで制限されると403になる。PR本文へ同じ規則のURLを記載することでも代用可能|
 |forkのPR|専用デプロイヤーは同じリポジトリ内のPRのみ対象。書き込み権限も渡さない。所有者が確認済みのブランチを作品リポジトリ内に作るか、代替artifactで確認|
