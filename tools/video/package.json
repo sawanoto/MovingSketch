@@ -1,0 +1,8 @@
+{
+  "name": "lifesketch-video-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"export": "node export.mjs", "check": "node check.mjs"},
+  "devDependencies": {"playwright": "1.56.1"}
+}

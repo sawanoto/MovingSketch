@@ -55,3 +55,7 @@ MelodyFly-v8-hard-transitions.zip
 47_vehicle/ChatGPTIMGsquidTop2.png
 MarupanFactory-itchio.zip
 MelodyFly4-itchio.zip
+
+# Local video builds (publish separately after approval)
+/tools/video/node_modules/
+/video-output/

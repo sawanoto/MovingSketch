@@ -1,0 +1,50 @@
+import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';
+import {openWork} from './browser.mjs';
+const root=fileURLToPath(new URL('../../',import.meta.url)).replace(/\/$/,'');
+const work=await openWork(root,'LifeSketch/001_doremi-pipes');
+try {
+  const {page}=work;
+  const url=page.url().split('?')[0];
+  await page.goto(url);
+  await page.waitForFunction(()=>document.querySelectorAll('#note-buttons button').length===8);
+  assert.equal(await page.evaluate(()=>typeof window.doremiDemo),'undefined');
+  await page.getByRole('button',{name:'ドの音を鳴らす',exact:true}).click();
+  await page.waitForFunction(()=>audioReady && getAudioContext().state==='running');
+  assert.equal(await page.evaluate(()=>activeNote),0);
+  await page.keyboard.press('8');
+  assert.equal(await page.evaluate(()=>activeNote),7);
+  await page.setViewportSize({width:390,height:844});
+  await page.waitForTimeout(100);
+  const canvas=await page.locator('canvas').boundingBox();
+  assert(canvas.width<=390);
+  await page.dispatchEvent('canvas','touchstart',{touches:[{identifier:0,clientX:canvas.x+30,clientY:canvas.y+220,pageX:canvas.x+30,pageY:canvas.y+220,screenX:30,screenY:220}]});
+  // Use a genuine touch-enabled context for p5's touch coordinates and audio startup.
+  const mobile=await page.context().browser().newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});
+  const touch=await mobile.newPage();
+  await touch.goto(url); await touch.waitForSelector('#note-buttons button');
+  await touch.getByRole('button',{name:'レの音を鳴らす',exact:true}).tap();
+  assert.equal(await touch.evaluate(()=>activeNote),1);
+  const box=await touch.locator('canvas').boundingBox();
+  await touch.touchscreen.tap(box.x+30,box.y+220);
+  assert.equal(await touch.evaluate(()=>activeNote),0);
+  assert.equal(await touch.evaluate(()=>getAudioContext().state),'running');
+  await mobile.close();
+  await page.goto(new URL('../',url).href); await page.waitForSelector('canvas',{timeout:1000}).catch(()=>{});
+  assert(await page.locator('a[href*="001_doremi-pipes"]').count()>0);
+  await page.goto(url+'?demo');
+  await page.waitForFunction(()=>window.doremiDemo?.state==='running');
+  assert.equal(await page.evaluate(()=>window.doremiDemo.scenario.events.length),23);
+  assert.deepEqual(work.errors,[]);
+  const playback = await page.evaluate(async () => {
+    const video=document.createElement('video'); document.body.replaceChildren(video);
+    video.src='/video-output/001_doremi-pipes.mp4';
+    await new Promise((resolve,reject)=>{video.onloadeddata=resolve;video.onerror=()=>reject(new Error('MP4 decode failed'));});
+    await video.play(); await new Promise(resolve=>setTimeout(resolve,600));
+    const result={time:video.currentTime,width:video.videoWidth,height:video.videoHeight,duration:video.duration};
+    video.pause();return result;
+  });
+  assert(playback.time>.3);assert.equal(playback.width,1080);assert.equal(playback.height,1920);
+  console.log('MP4 browser playback:',playback);
+  console.log('PASS: normal mode isolation, button, keyboard, mobile touch/canvas, audio startup, gallery, automatic demo');
+} finally {await work.close();}
