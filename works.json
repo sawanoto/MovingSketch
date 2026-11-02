@@ -31,5 +31,8 @@
   { "number": "32", "title": "Ma-pan: Family", "description": "6体の家族マーパンを、表情・視線・身長差とともに見比べるキャラクターカタログです。", "path": "./32_Family/" },
   { "number": "34", "title": "Eating Notes", "description": "現実の音やドレミを食べさせて、色と世界を変えながらマーパンを育てます。", "path": "./34_Eatingnotes/" }
   ,{ "number": "33", "title": "Ma-pan: Beat Clicker", "description": "マーパンを叩いて音符と演奏会場を育てるリズムクリッカーです。", "path": "./33_CookieClicker/" },
-  { "number": "45", "title": "Ma-pan: Shape Lab", "description": "16種類の柔らかな輪郭を、マーパンらしさと積木としての特徴から比較する形の研究ページです。", "path": "./45_Shape/" }
+  { "number": "45", "title": "Ma-pan: Shape Lab", "description": "16種類の柔らかな輪郭を、マーパンらしさと積木としての特徴から比較する形の研究ページです。", "path": "./45_Shape/" },
+  {"number": "102", "title": "テレビの前では操作不能", "description": "ドラッグで移動 · 床を回すと身体ごと回り込む", "path": "./102_tv-unresponsive/"},
+  {"number": "103", "title": "テレビホイホイ", "description": "そのまま、眺める", "path": "./103_tv-gathering/"},
+  {"number": "104", "title": "テレビの引力", "description": "ドラッグで移動 · 手を離す", "path": "./104_tv-gravity/"}
 ]
