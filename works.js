@@ -100,5 +100,8 @@ window.MOVING_SKETCH_WORKS = [
   ,  {number:98,title:"まあぱん いないいないばあ",thumbnail:"./98_Peekaboo/thumbnail.webp",url:"./98_Peekaboo/",tags:["Interactive"],description:"いないいないばあを楽しむマーパンのインタラクティブ絵本。"}
   ,  {number:99,title:"マーパン はみがき",thumbnail:"./99_ToothBrushing/thumbnail.webp",url:"./99_ToothBrushing/",tags:["Interactive"],description:"マーパンの歯を指で磨く、4ページのインタラクティブ絵本。"}
   ,  {number:100,title:"マーパン カラフル色絵本",thumbnail:"./100_Color/preview.png",url:"./100_Color/",tags:["Interactive"],description:"色を選んで楽しむマーパンの絵本。"}
-  ,  {number:101,title:"ハリネズミマーパン | Hedgehog Marpan",thumbnail:"./101_hedgehog/thumbnail.webp",url:"./101_hedgehog/",tags:["Interactive"],description:"ハリネズミになったマーパンと触れ合う作品。"}
+  ,  {number:101,title:"ハリネズミマーパン | Hedgehog Marpan",thumbnail:"./101_hedgehog/thumbnail.webp",url:"./101_hedgehog/",tags:["Interactive"],description:"ハリネズミになったマーパンと触れ合う作品。"},
+{"number": 102, "title": "テレビの前では操作不能", "thumbnail": "./102_tv-unresponsive/thumbnail.png", "url": "./102_tv-unresponsive/", "date": "2026-11-02", "tags": ["LIFESketch", "Interactive", "Sound"], "description": "ドラッグで移動 · 床を回すと身体ごと回り込む"},
+{"number": 103, "title": "テレビホイホイ", "thumbnail": "./103_tv-gathering/thumbnail.png", "url": "./103_tv-gathering/", "date": "2026-11-02", "tags": ["LIFESketch", "Interactive", "Sound"], "description": "そのまま、眺める"},
+{"number": 104, "title": "テレビの引力", "thumbnail": "./104_tv-gravity/thumbnail.png", "url": "./104_tv-gravity/", "date": "2026-11-02", "tags": ["LIFESketch", "Interactive", "Sound"], "description": "ドラッグで移動 · 手を離す"}
 ];
